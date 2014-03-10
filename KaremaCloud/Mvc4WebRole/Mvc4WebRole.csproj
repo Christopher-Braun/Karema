@@ -565,6 +565,7 @@
     <Content Include="Views\Info\ByAuthor.cshtml" />
     <Content Include="Views\Shared\_MobileTitle.cshtml" />
     <Content Include="Views\Shared\_Title.cshtml" />
+    <Content Include="Views\Account\Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
