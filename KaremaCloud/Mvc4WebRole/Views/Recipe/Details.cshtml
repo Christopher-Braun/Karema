@@ -1,0 +1,160 @@
+﻿@using Mvc4WebRole.Models
+@model RecipeModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div data-role="page" data-theme="c">
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var personCount = $("#personCount");
+
+            var defaultPersonCount = $('#defaultPersonCount').val();
+
+            var ingredientCount = $('ul li').length;
+
+            personCount.on("change", null, null, applyPersonCount);
+            personCount.on("input", null, null, applyPersonCount);
+
+            function applyPersonCount() {
+                var currentPersonCount = $(this).val();
+                var multiplier = currentPersonCount / defaultPersonCount;
+
+                for (var i = 0; i < ingredientCount; i++) {
+                    var origAmountType = $('#' + i + 'origAmountType').val();
+                    var origName = $('#' + i + 'origName').val();
+                    var origAmount = parseFloat($('#' + i + 'origAmount').val());
+
+                    var newAmount = round(origAmount * multiplier, 2);
+
+                    var listItem = $('#' + i);
+                    listItem[0].firstChild.textContent = "" + newAmount + " " + origAmountType + " " + origName;
+                }
+            }
+
+            function round(x, n) {
+                var a = Math.pow(10, n);
+                return (Math.round(x * a) / a);
+            }
+        });
+
+    </script>
+
+
+    <style type="text/css">
+        pre {
+            /*border: 3px double #006;*/
+            font-family: Helvetica,​Arial,​sans-serif;
+            font-size: 0,85em;
+            /*text-shadow: 0 1px 0 #FFFFFF;*/
+            /*margin-left: 10px;*/
+            /*color: #009;*/
+            /*background-color: #5E87B0;*/
+            white-space: -moz-pre-wrap !important;
+            white-space: -pre-wrap;
+            white-space: -o-pre-wrap;
+            white-space: pre-wrap;
+        }
+
+            pre span {
+                text-transform: uppercase;
+            }
+    </style>
+
+
+    <div data-role="header" data-theme="c" @*data-add-back-btn="true" data-back-btn-text="Zurück"*@>
+        <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Zurück</a>
+        <h1>@ViewBag.Title</h1>
+        <a href="/Recipe/Index" data-icon="home">Übersicht</a>
+    </div>
+    <div data-role="content">
+
+        <h2>@Html.DisplayFor(model => model.Name)</h2>
+
+        <h3>@Html.DisplayNameFor(model => model.Description) </h3>
+
+
+        @Html.Raw("<pre>" + Model.Description + "</pre>")
+
+        <h3>@Html.DisplayNameFor(model => model.Ingredients)</h3>
+
+
+        @Html.HiddenFor(model => model.DefaultPersonCount, new { id = "defaultPersonCount" })
+
+        <ul>
+
+            @for (int i = 0; i < Model.Ingredients.Count; i++)
+            {
+                var ingredient = Model.Ingredients.ElementAt(i);
+
+                @Html.HiddenFor(model => ingredient.Amount, new { id = @i + "origAmount" })
+                @Html.HiddenFor(model => ingredient.AmountType, new { id = @i + "origAmountType" })
+                @Html.HiddenFor(model => ingredient.Name, new { id = @i + "origName" })
+
+                <li id="@i">@ingredient.Amount @ingredient.AmountType @ingredient.Name </li>
+            }
+        </ul>
+
+        <h3>@Html.DisplayNameFor(model => model.DefaultPersonCount)</h3>
+
+        <input id="personCount" type="number" data-type="range" data-highlight="true" value="@Model.DefaultPersonCount" name="personCount" min="1" max="12" data-val-required="The Personenzahl field is required." data-val-number="The field Personenzahl must be a number." data-val="true">
+
+        <p>
+            <div data-role="collapsible" data-iconpos="right" data-mini="true">
+                <h3>Meta-Info</h3>
+                <table>
+                    <tr>
+                        <td>
+                            @Html.DisplayNameFor(model => model.Tags)
+                        </td>
+                        <td>
+                            @{
+                                var tags2 = String.Join(" | ", Model.Tags.Select(t => t.Caption));
+                                @Html.Raw(tags2)
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Hint) </td>
+                        <td>@Html.DisplayFor(model => model.Hint) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Author) </td>
+                        <td>@Html.DisplayFor(model => model.Author) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.TimeCreated) </td>
+                        <td>@Html.DisplayFor(model => model.TimeCreated) </td>
+                    </tr>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.LastTimeChanged) </td>
+                        <td>@Html.DisplayFor(model => model.LastTimeChanged) </td>
+                    </tr>
+                </table>
+            </div>
+        </p>
+
+        @{
+            String imageLinkTitle = Model.HasImage ? "Bild" : "Bild hinzufügen";
+        }
+
+        <p>
+            @Html.ActionLink(imageLinkTitle, "Details", "RecipeImage", new { id = Model.ID }, null)
+        </p>
+
+        <p>
+            @Html.ActionLink("Bearbeiten", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Schlagworte zuweisen", "AssignTags", "Tags", new { id = Model.ID }, new object()) |
+            @Html.ActionLink("Löschen", "Delete", new { id = Model.ID })
+        </p>
+
+        <p>
+            @Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
+        </p>
+
+    </div>
+
+</div>
+

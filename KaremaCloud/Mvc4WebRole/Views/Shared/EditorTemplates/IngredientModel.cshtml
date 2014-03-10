@@ -1,0 +1,53 @@
+﻿@model Mvc4WebRole.Models.IngredientModel
+
+@{
+    ViewBag.Title = "_IngredientEditor";
+}
+
+
+<script>
+    $(document).ready(function () {
+        $("#ingredients").trigger("create");
+    });
+</script>
+
+
+<fieldset>
+    <legend>IngredientModel</legend>
+
+    @Html.HiddenFor(model => model.ID)
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Amount)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Amount)
+        @Html.ValidationMessageFor(model => model.Amount)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AmountType)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.AmountType)
+        @Html.ValidationMessageFor(model => model.AmountType)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    @*        <p>
+            <input type="submit" value="Save" />
+        </p>*@
+</fieldset>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

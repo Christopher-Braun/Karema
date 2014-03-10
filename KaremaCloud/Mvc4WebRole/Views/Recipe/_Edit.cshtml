@@ -1,0 +1,163 @@
+﻿@using Mvc4WebRole.Models
+
+@model RecipeModel
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#ingredients").trigger("create");
+
+        $("#btnAdd").click(function (e) {
+            var itemIndex = $("#ingredients tr").length - 1;
+            e.preventDefault();
+            var newItem = $("<tr id='" + itemIndex + "'><td>" +
+                "<input type='text'  data-mini='true'    value=''           id='Ingredients_" + itemIndex + "__Amount'      name='Ingredients[" + itemIndex + "].Amount' /></td><td>" +
+                "<input type='text'     value=''        id='Ingredients_" + itemIndex + "__AmountType'  name='Ingredients[" + itemIndex + "].AmountType' /></td><td>" +
+                "<input type='text'     value=''        id='Ingredients_" + itemIndex + "__Name'        name='Ingredients[" + itemIndex + "].Name'       /></td><td>" +
+
+                "<button type='button'                  id='Ingredients_" + itemIndex + "__Remove'      name='Ingredients[" + itemIndex + "].Remove' data-icon='delete' >Entfernen</button></td>" +
+                "</tr>");
+            $("#ingredients").append(newItem);
+
+            $("#Ingredients_" + itemIndex + "__Remove").click(function () {
+                $("#" + itemIndex).remove();
+            });
+
+            //Trigger jquery mobile
+            $("#Ingredients_" + itemIndex + "__Amount").textinput();
+            $("#Ingredients_" + itemIndex + "__AmountType").textinput();
+            $("#Ingredients_" + itemIndex + "__Name").textinput();
+            $("#Ingredients_" + itemIndex + "__Remove").button();
+
+        });
+
+        //Set Remove Command
+        var itemCount = $("#ingredients tr").length - 1;
+        for (var itemIndex = 0; itemIndex < itemCount; itemIndex++) {
+            $("#Ingredients_" + itemIndex + "__Remove").click(function (evt) {
+                evt = evt || window.event;
+                var target = evt.target || evt.srcElement;
+                var id = target.id;
+                id = id.replace("Ingredients_", "");
+                id = id.replace("__Remove", "");
+                $("#" + id).remove();
+            });
+        }
+    });
+
+    $(function () {
+        $("form").submit(function () {
+            // Normalize the sequence before submitting the form
+            ensureControlGroupsInNumericalOrder();
+        });
+    });
+
+    function ensureControlGroupsInNumericalOrder() {
+
+        var groups = $("#ingredients tr");
+        for (var seq = 1; seq < groups.length; seq++) {
+            var group = groups[seq];
+            var cells = group.cells;
+            //Button nicht
+            for (var c = 0; c < cells.length - 1; c++) {
+                var td = cells[c];
+                var div = td.childNodes[0];
+                var input = div.childNodes[0];
+
+                if (c == 0) {
+                    input.name = "Ingredients[" + (seq - 1) + "].Amount";
+                }
+                if (c == 1) {
+                    input.name = "Ingredients[" + (seq - 1) + "].AmountType";
+                }
+                if (c == 2) {
+                    input.name = "Ingredients[" + (seq - 1) + "].Name";
+                }
+            }
+        }
+    }
+
+</script>
+
+<div>
+    <div>
+        <h3>@Html.LabelFor(model => model.Name)</h3>
+    </div>
+    <div>
+        @Html.EditorFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div>
+        <h3>@Html.LabelFor(model => model.Hint)</h3>
+    </div>
+    <div>
+        @Html.EditorFor(model => model.Hint)
+        @Html.ValidationMessageFor(model => model.Hint)
+    </div>
+
+    <div>
+        <h3>@Html.LabelFor(model => model.Description)</h3>
+    </div>
+    <div>
+        @Html.EditorFor(model => model.Description)
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+
+    <div>
+        <h3>@Html.LabelFor(model => model.DefaultPersonCount)</h3>
+    </div>
+
+    <div>
+        @Html.TextBoxFor(model => model.DefaultPersonCount, new { @type = "range", min = 1, max = 12 })
+        @Html.ValidationMessageFor(model => model.DefaultPersonCount)
+    </div>
+
+</div>
+
+
+<div>
+    <p>
+
+    </p>
+    <div>
+        @Html.LabelFor(model => model.Ingredients)
+    </div>
+
+
+    <table id="ingredients">
+        <tr>
+            <th>Menge </th>
+            <th>Mengenart </th>
+            <th>Zutat </th>
+        </tr>
+
+        @if ( Model != null )
+        {
+            for ( int i = 0; i < Model.Ingredients.Count; i++ )
+            {
+                <tr id="@i">
+
+                    <td>@Html.EditorFor(model => model.Ingredients[i].Amount) </td>
+                    <td>@Html.EditorFor(model => model.Ingredients[i].AmountType) </td>
+                    <td>@Html.EditorFor(model => model.Ingredients[i].Name) </td>
+                    @*  <td>@Html.HiddenFor(model => model.Ingredients[i].ID) </td>*@
+
+                    <td>
+                        <button id='Ingredients_@(i)__Remove' data-icon="delete" type='button'>Entfernen</button>
+                    </td>
+
+                    @Html.ValidationMessageFor(model => model.Ingredients[i].Amount)
+                    @Html.ValidationMessageFor(model => model.Ingredients[i].AmountType)
+                    @Html.ValidationMessageFor(model => model.Ingredients[i].Name)
+                </tr>
+
+            }
+        }
+
+
+    </table>
+
+    <button id="btnAdd" type="button" data-icon="plus">Zutat hinzufügen </button>
+</div>
+

@@ -1,0 +1,82 @@
+﻿@using Mvc4WebRole.Models
+@model RecipeModel
+
+@{
+    ViewBag.Title = "Vorschau";
+}
+
+
+
+<div data-role="page">
+
+    <script type="text/javascript">
+
+    $(document).ready(function () {
+        setTimeout(setImage, 300);
+    });
+
+    function setImage() {
+        var recipeId = $('#recipeId').val();
+        $("#preview").attr("src", "/RecipeImage/GetRecipeImage/" + recipeId);
+        $("#preview").attr("width", getWidth() - 30);
+        $("#preview").fadeIn();
+    }
+
+    function getWidth() {
+        xWidth = null;
+        if (window.screen != null)
+            xWidth = window.screen.availWidth;
+
+        if (window.innerWidth != null)
+            xWidth = window.innerWidth;
+
+        if (document.body != null)
+            xWidth = document.body.clientWidth;
+
+        return xWidth;
+    }
+
+</script>
+
+    <div data-theme="b" data-role="header">
+        <h1>@ViewBag.Title</h1>
+        <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Zurück</a>
+        <a href="/Recipe/Index" data-role="button" data-icon="home">Übersicht</a>
+    </div>
+    <div data-role="content">
+
+        <h3>@Html.DisplayFor(m => m.Name)</h3>
+
+
+        <img src="/" style="display: none" id="preview" />
+
+        @if ( Model.HasImage )
+        {
+            <p>
+                @Html.ActionLink("Bild löschen", "Delete", new { id = Model.ID })
+            </p>
+        }
+
+        @using ( Html.BeginForm("SetRecipeImage","RecipeImage", FormMethod.Post, new { enctype = "multipart/form-data" }) )
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <p>
+                Bild auswählen
+                <input type="file" name="file" title="Bild auswählen" accept="image/*"  />
+            </p>
+            @Html.HiddenFor(m => m.ID, new { id = "recipeId" })
+
+            <p>
+                <button type="submit">Bild hochladen</button>
+            </p>
+        }
+
+        <p>
+            @Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
+        </p>
+
+    </div>
+
+</div>

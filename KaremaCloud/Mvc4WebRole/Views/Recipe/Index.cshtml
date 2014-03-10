@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Mvc4WebRole.ViewModels.RecipeInfo>
+
+@{
+    ViewBag.Title = "Rezepte";
+}
+
+@*@section featured {
+                          <section class="featured">
+                              <div class="content-wrapper">*@
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Neues Rezept", "Create")
+</p>
+
+@*</div>
+</section>
+                      }*@
+    
+    
+ <form class="ui-filterable">
+     <input type="search" id="filter-input" title="Suchen">
+ </form>
+
+
+<div data-role="content">
+  <ul data-role="listview" data-filter="true" data-input="#filter-input">
+     @foreach (var item in Model)
+    {
+         <li data-icon="grid">@Html.ActionLink(item.Name, "Details", new { id = item.Id }) </li>
+    }
+   </ul>
+</div>
+
+
+
+
+

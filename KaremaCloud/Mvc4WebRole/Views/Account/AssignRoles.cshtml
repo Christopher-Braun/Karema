@@ -1,0 +1,30 @@
+﻿@model Mvc4WebRole.ViewModels.UserWithRoles
+
+@{
+    ViewBag.Title = "Rollen zuweisen";
+}
+
+<h2>AssignRoles for @Model.UserName</h2>
+
+@using ( Html.BeginForm() )
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    
+     @Html.HiddenFor(model => model.UserID)
+
+    for ( int i = 0; i < Model.RoleInfos.Count(); i++ )
+    {
+        @Html.HiddenFor(model => model.RoleInfos[i].RoleName)
+        <p>
+            @Html.CheckBoxFor(m => m.RoleInfos[i].IsChecked)
+            @Html.LabelFor(m => m.RoleInfos[i].IsChecked, Model.RoleInfos[i].RoleName)
+        </p>
+    }
+    
+    
+    <p>
+        <button type="submit">Änderungen übernehmen</button>
+    </p>
+
+}

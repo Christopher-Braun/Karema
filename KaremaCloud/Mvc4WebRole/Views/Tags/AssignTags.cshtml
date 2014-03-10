@@ -1,0 +1,46 @@
+﻿@model Mvc4WebRole.ViewModels.RecipeTagMapModel
+
+@{
+    ViewBag.Title = "Schlagwörter zuweisen";
+}
+
+
+@using ( Html.BeginForm() )
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.RecipeID)
+
+
+    <h2>@ViewBag.Title</h2>
+
+    <h3>
+        @Html.DisplayNameFor(model => model.RecipeName) : @Html.DisplayFor(model => model.RecipeName)
+    </h3>
+
+    for ( int i = 0; i < Model.TagInfos.Count(); i++ )
+    {
+        @Html.HiddenFor(model => model.TagInfos[i].ID)
+        <p>
+            @Html.CheckBoxFor(m => m.TagInfos[i].IsChecked)
+            @Html.LabelFor(m => m.TagInfos[i].IsChecked, Model.TagInfos[i].Caption)
+        </p>
+    }
+
+    <p>
+        <button type="submit">Änderungen übernehmen</button>
+    </p>
+}
+
+<p>
+    @Html.ActionLink("Schlagwörter verwalten", "Index")
+</p>
+
+
+<p>
+    @Html.ActionLink("Abbrechen", "Details", "Recipe", new { ID = Model.RecipeID }, new object()) |@Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
+</p>
+
+
+

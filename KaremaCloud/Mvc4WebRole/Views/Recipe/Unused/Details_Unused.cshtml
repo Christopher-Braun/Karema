@@ -1,0 +1,101 @@
+﻿@using Mvc4WebRole.Models
+@model RecipeModel
+
+@{
+    ViewBag.Title = "Details";
+    ViewBag.CurrentPersonCount = Model.DefaultPersonCount;
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var personCount = $("#personCount");
+
+
+        personCount.on("change", null, null, function (e) {
+            var currentPersonCount = $(this).val();
+
+            var ingredientCount = $('ul li').length;
+
+            for (var i = 0; i < ingredientCount; i++) {
+                var listItem = $('#' + i);
+
+                var origAmount = $('#' + i + 'origAmount').val();
+                var origAmountType = $('#' + i + 'origAmountType').val();
+                var origName = $('#' + i + 'origName').val();
+
+                var defaultPersonCount = $('#defaultPersonCount').val();
+
+                var newAmount = origAmount * currentPersonCount / defaultPersonCount;
+
+                // var child = listItem.childNodes[0];
+
+                listItem[0].firstChild.textContent = "" + newAmount + " " + origAmountType + " " + origName;
+            }
+
+            //$('ul li').each(function (i) {
+
+            //    var $this = $(this);
+            //    var child = this.firstChild;
+
+            //    var subs = child.textContent.split(" ");
+            //    var sub0 = subs[0];
+
+
+
+            //    var newval = child.textContent.replace(sub0, val);
+            //    child.textContent = newval;
+
+
+            //});
+        });
+    });
+
+</script>
+
+<div data-role="page">
+    <div data-theme="c" data-role="header">
+        <h1>Details</h1>
+        <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Zurück</a>
+    </div>
+    <div data-role="content">
+
+        <h3>@Html.DisplayFor(model => model.Name)</h3>
+        <p />
+        <p>
+            @Html.TextAreaFor(model => model.Description, new { @readonly = true })
+        </p>
+        <h3>@Html.DisplayNameFor(model => model.Ingredients)</h3>
+        <p></p>
+
+        @Html.HiddenFor(model => model.DefaultPersonCount, new { id = "defaultPersonCount" });
+
+        <ul id="ul" data-role="listview">
+
+            @for ( int i = 0; i < Model.Ingredients.Count; i++ )
+            {
+                @Html.HiddenFor(model => model.Ingredients[i].Amount, new { id = @i + "origAmount" });
+                @Html.HiddenFor(model => model.Ingredients[i].AmountType, new { id = @i + "origAmountType" });
+                @Html.HiddenFor(model => model.Ingredients[i].Name, new { id = @i + "origName" });
+
+                var item = Model.Ingredients[i];
+                <li id="@i">@item.Amount @item.AmountType @item.Name </li>
+            }
+        </ul>
+        <p></p>
+        <h3>@Html.DisplayNameFor(model => model.PersonCount)</h3>
+        @Html.TextBoxFor(model => model.PersonCount, new { @id = "personCount", @type = "range", min = 1, max = 12 })
+        <p></p>
+
+        @*@Html.Action("_Ingredients", new { recipeModel = Model })*@
+
+        <p>
+            @Html.ActionLink("Zurück zur Übersicht", "Index") |
+            @Html.ActionLink("Bearbeiten", "Edit", new { id = Model.ID }) |
+            @Html.ActionLink("Löschen", "Delete", new { id = Model.ID })
+        </p>
+
+    </div>
+
+</div>
+
+

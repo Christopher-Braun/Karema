@@ -1,0 +1,64 @@
+﻿@model Mvc4WebRole.Models.RecipeModel
+
+@{
+    ViewBag.Title = "Bearbeiten";
+}
+
+@Styles.Render("~/Content/Mobile/css", "~/Content/jquerymobile/css")
+
+
+<div data-role="page">
+    <div data-theme="e" data-role="header">
+        <h1>@ViewBag.Title</h1>
+        <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Zurück</a>
+        <a href="/Recipe/Index" data-role="button" data-icon="home">Übersicht</a>
+    </div>
+
+    <div data-role="content">
+
+        @using ( Html.BeginForm() )
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+
+            @Html.HiddenFor(model => model.ID)
+
+            @Html.HiddenFor(model => model.TimeCreated)
+            @Html.HiddenFor(model => model.LastTimeChanged)
+
+            @Html.Action("_Edit", Model)
+
+            if ( WebSecurity.CurrentUserName == "Admin" )
+            {
+                <div>
+                    <h3>@Html.LabelFor(model => model.Author)</h3>
+                </div>
+                <div>
+                    @Html.EditorFor(model => model.Author)
+                    @Html.ValidationMessageFor(model => model.Author)
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.Author)
+            }
+
+            <p>
+                <button type="submit">Änderungen übernehmen</button>
+            </p>
+        }
+
+        <p>
+            @Html.ActionLink("Abbrechen", "Details", new { Model.ID }) | @Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
+        </p>
+
+    </div>
+
+</div>
+
+
+
+
+
+

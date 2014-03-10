@@ -1,0 +1,39 @@
+﻿@model Mvc4WebRole.Models.TagModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Schlagwort bearbeiten</h2>
+
+@using ( Html.BeginForm() )
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TagModel</legend>
+
+        @Html.HiddenFor(model => model.ID)
+
+        <div>
+            @Html.LabelFor(model => model.Caption)
+        </div>
+        <div>
+            @Html.EditorFor(model => model.Caption)
+            @Html.ValidationMessageFor(model => model.Caption)
+        </div>
+
+        <p>
+            <button type="submit">Änderungen übernehmen</button>
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Zurück", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

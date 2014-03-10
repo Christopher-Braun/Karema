@@ -1,0 +1,14 @@
+﻿@model Mvc4WebRole.Models.Meal
+
+@{
+    ViewBag.Title = "_SetPersonCount";
+}
+
+@Html.HiddenFor(model => model.ID)
+
+<h3>@Html.DisplayNameFor(model => model.PersonCount)</h3>
+
+@*@Html.EditorFor(model => model.PersonCount)*@
+@Html.TextBoxFor(model => model.PersonCount, new { @type = "range", min = 1, max = 12 })
+
+<button type="submit">Anwenden</button>

@@ -1,0 +1,29 @@
+﻿@model Mvc4WebRole.Models.LoginModel
+
+@{
+    ViewBag.Title = "Zugriff verweigert";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<p>
+    Sie haben keinen Zugriff auf diesen Bereich. Dies kann mehrere Gründe haben
+</p>
+
+<ul>
+    <li>Sie haben Sich registriert aber haben noch keine Zugriffsrechte</li>
+    <li>Sie möchten ein Rezept eines anderen Autoren ändern aber ihre Zugriffsrechte erlauben dies nicht. Diese ausschliesslich ist Editoren vorbehalten </li>
+    <li>Sie möchten Schlagwörter ändern aber ihre Zugriffsrechte erlauben dies nicht. Diese ausschliesslich ist Editoren vorbehalten </li>
+    <li>Sie möchten Zugriffsrechte ändern aber ihre Zugriffsrechte erlauben dies nicht. Diese ausschliesslich ist Administratoren vorbehalten </li>
+</ul>
+
+<p>
+    <b>
+        Für eine Änderung Ihrer Zugriffsrechte wenden Sie sich bitte an den Ersteller der Seite.
+    </b>
+</p>
+
+<a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Zurück</a>
+
+

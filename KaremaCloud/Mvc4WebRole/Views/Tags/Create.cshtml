@@ -1,0 +1,36 @@
+﻿@model Mvc4WebRole.Models.TagModel
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>TagModel</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Caption)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Caption)
+            @Html.ValidationMessageFor(model => model.Caption)
+        </div>
+
+        <p>
+                    <button data-icon="delete" type="submit">Erstellen</button>
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Zurück", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,31 @@
+﻿@model Mvc4WebRole.Models.TagModel
+
+@{
+    ViewBag.Title = "Schlagwort löschen";
+}
+
+
+
+<h3>Wollen Sie das Schlagwort "@Model.Caption" wirklich löschen ?</h3>
+
+<p>Dieses Schlagwort wird verwendet von</p>
+<ul>
+    @foreach ( var recipe in Model.Recipes )
+    {
+        <li>@recipe.Name </li>
+    }
+</ul>
+
+
+@using ( Html.BeginForm() )
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <button data-icon="delete" type="submit">Löschen</button>
+        
+     
+    </p>
+    <div>
+    @Html.ActionLink("Zurück", "Index")
+</div>
+}

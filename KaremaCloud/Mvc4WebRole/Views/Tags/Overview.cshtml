@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Mvc4WebRole.Models.TagModel>
+
+@{
+    ViewBag.Title = "Schlagwörter";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+@Html.ActionLink("Schlagwörter verwalten", "Index","Tags")
+</p>
+
+<ul>
+
+    @foreach ( var item in Model )
+    {
+        <li>
+            @Html.DisplayFor(modelItem => item.Caption)
+            <ul>
+                @foreach ( var recipe in item.Recipes )
+                {
+                    <li>@Html.ActionLink(recipe.Name, "Details", "Recipe", new { id = recipe.ID }, new {}) </li>
+                }
+            </ul>
+
+        </li>
+    }
+
+</ul>
+
+<p>
+    @Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
+</p>

@@ -1,0 +1,36 @@
+﻿@using Mvc4WebRole.Models
+
+@model RecipeModel
+
+@{
+    ViewBag.Title = "_Ingredients";
+}
+
+<script>
+    $(document).ready(function () {
+        $("#ingredients").trigger("create");
+    });
+</script>
+
+
+<div id="ingredients" data-role="content">
+
+    <h3>@Html.DisplayNameFor(t => t.Ingredients)</h3>
+
+    <p></p>
+
+    <ul data-role="listview">
+        @foreach ( var item in Model.GetIngredients() )
+        {
+            <li>@Html.DisplayFor(model => item.Amount) @Html.DisplayFor(model => item.AmountType) @Html.DisplayFor(model => item.Name) </li>
+        }
+    </ul>
+
+    @using ( Ajax.BeginForm("_SubmitPersonCount", "Recipe", new AjaxOptions() { UpdateTargetId = "ingredients" }) )
+    {
+        @Html.AntiForgeryToken()
+        @Html.Action("_SetPersonCount", new { ID = Model.ID, PersonCount = Model.PersonCount })
+    }
+
+</div>
+

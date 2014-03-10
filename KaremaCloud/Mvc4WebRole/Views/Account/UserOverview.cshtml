@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Mvc4WebRole.Models.UserProfile>
+    @{
+        ViewBag.Title = "UserOverview";
+    }
+
+
+    <h2>UserOverview</h2>
+
+
+    <div data-role="content">
+        <p></p>
+
+        <ul data-role="listview" data-filter="true" data-filter-placeholder="Suchen..." data-theme="c">
+            @foreach ( var item in Model )
+            {
+                <li data-icon="grid">@Html.ActionLink(item.UserName, "AssignRoles", new { userId = item.UserId }) </li>
+            }
+        </ul>
+    </div>
+

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<string>
+
+    @{
+        ViewBag.Title = "Logs";
+    }
+
+    <h2>@ViewBag.Title</h2>
+    <p>
+        <ul>
+            @foreach ( String log in Model )
+            {
+                <li>
+                    @Html.DisplayFor(m => log);
+                </li>
+            }
+        </ul>
+    </p>
+
+
+      @Html.ActionLink("Logs löschen", "DeleteLogs")
+
+
+
+

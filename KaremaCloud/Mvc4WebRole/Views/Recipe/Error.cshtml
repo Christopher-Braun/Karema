@@ -1,0 +1,21 @@
+﻿@model Exception
+
+@{
+    ViewBag.Title = "Fehler";
+}
+
+<h2>@ViewBag.Title</h2>
+
+
+<div data-role="content">
+    @Html.DisplayNameFor(m => m.Message)
+    @Html.DisplayFor(m => m.Message)
+    @Html.DisplayNameFor(m => m.InnerException)
+    @Html.DisplayFor(m => m.InnerException)
+
+</div>
+
+<p>
+    @Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
+</p>
+

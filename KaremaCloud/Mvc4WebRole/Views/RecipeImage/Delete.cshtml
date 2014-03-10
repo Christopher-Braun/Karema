@@ -1,0 +1,30 @@
+﻿@model Mvc4WebRole.Models.RecipeModel
+
+@{
+    ViewBag.Title = "Bild Löschen";
+}
+
+
+<div data-role="page">
+    <div data-theme="e" data-role="header">
+        <h1>@ViewBag.Title</h1>
+        <a href="#" data-role="button" data-rel="back" data-icon="arrow-l">Zurück</a>
+        <a href="/Recipe/Index" data-role="button" data-icon="home">Übersicht</a>
+    </div>
+
+    <div data-role="content">
+
+        <h2>Wollen Sie das Bild wirklich löschen?</h2>
+
+        @using ( Html.BeginForm() )
+        {
+            @Html.AntiForgeryToken()
+            <p>
+                <button data-icon="delete" type="submit">Löschen</button>
+                @Html.ActionLink("Abbrechen", "Details", "Recipe" ,new { Model.ID },null)
+            </p>
+        }
+
+    </div>
+
+</div>
