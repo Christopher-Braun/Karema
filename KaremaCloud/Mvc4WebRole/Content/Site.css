@@ -25,7 +25,7 @@ a {
 
     a:link, a:visited,
     a:active, a:hover {
-        color: #red;
+        color: #3388cc;
     }
 
     a:hover {
@@ -110,7 +110,7 @@ h5, h6 {
     .main-content {
         background: url("../Images/accent.png") no-repeat;
         padding-left: 10px;
-        padding-top: 30px;
+        padding-top: 10px;
     }
 
     .featured + .main-content {
@@ -118,7 +118,7 @@ h5, h6 {
     }
 
 header .content-wrapper {
-    padding-top: 20px; 
+    padding-top: 10px; 
 }
 
 /* Here footer*/
@@ -551,7 +551,7 @@ th {
     }
 
     th a:link, th a:visited, th a:active, th a:hover {
-        color: #red;
+        color: #3388cc;
         font-weight: 600;
         text-decoration: none;
         padding: 0;

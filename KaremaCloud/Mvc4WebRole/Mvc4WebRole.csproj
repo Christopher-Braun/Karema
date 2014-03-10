@@ -485,8 +485,6 @@
     <Content Include="Content\Mobile\Css\Images\icons-18-white.png" />
     <Content Include="Content\Mobile\Css\Images\icons-36-black.png" />
     <Content Include="Content\Mobile\Css\Images\icons-36-white.png" />
-    <Content Include="Content\MyTheme.css" />
-    <Content Include="Content\MyTheme.min.css" />
     <Content Include="Content\Site.Mobile.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -566,6 +564,7 @@
     <Content Include="Views\Account\NoAccess.cshtml" />
     <Content Include="Views\Info\ByAuthor.cshtml" />
     <Content Include="Views\Shared\_MobileTitle.cshtml" />
+    <Content Include="Views\Shared\_Title.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
