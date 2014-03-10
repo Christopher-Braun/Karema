@@ -14,12 +14,6 @@
         <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         <script src="http://code.jquery.com/mobile/1.3.2/jquery.mobile-1.3.2.min.js"></script>*@
 
-   
-     @*<script type="text/javascript">
-        // do not handle links via ajax by default
-        (document).ready(function () { $.mobile.ajaxEnabled = false; });
-    </script>*@
-
     @*<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript">
         // do not handle links via ajax by default
@@ -33,7 +27,6 @@
     @Scripts.Render("~/bundles/jqueryval")
 
 </head>
-
 
 <body>
     <header>
@@ -76,36 +69,4 @@
 
     @RenderSection("scripts", required: false)
 </body>
-
-@*<body>
-        <div data-role="page" data-theme="a">
-            <header>
-                <div class="content-wrapper">
-                    <div class="float-left">
-                        <p class="site-title">@Html.ActionLink("KaReMa", "Index", "Recipe")</p>
-                    </div>
-                    <div class="float-right">
-                        <section id="login">
-                            @Html.Partial("_LoginPartial")
-                        </section>
-                    </div>
-                </div>
-            </header>
-
-            @Html.Partial("_ViewSwitcher")
-
-            <div data-role="header">
-                <h1>@ViewBag.Title</h1>
-            </div>
-
-            <div data-role="content">
-                @RenderSection("featured", false)
-                <section class="content-wrapper main-content clear-fix">
-                    @RenderBody()
-                </section>
-            </div>
-
-        </div>
-        @RenderSection("scripts", required: false)
-    </body>*@
 </html>
