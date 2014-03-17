@@ -34,8 +34,8 @@
 </head>
 
 <body>
-    <header> 
-        <div class="content-wrapper" >
+    <header>
+        <div  class="content-wrapper">
             <div class="float-left">
                 <p class="site-title">@Html.ActionLink("Karema", "Index", "Recipe")</p>
             </div>
@@ -62,19 +62,25 @@
         </section>
     </div>
 
-    <div class="content-wrapper">
-        @Html.Partial("_ViewSwitcher")
-    </div>
 
-        <footer data-role="footer">
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Karema cloud</p>
-                </div>
+
+    <footer data-role="footer">
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Karema cloud</p>
+              
             </div>
-        </footer>
+        </div>
+    </footer>
+    
 
-        @RenderSection("scripts", required: false)
+    <div class="content-wrapper">
+        <p />
+        @Html.Partial("_ViewSwitcher")
+        <p />
+    </div>
+    
+    @RenderSection("scripts", required: false)
 </body>
 
 </html>
