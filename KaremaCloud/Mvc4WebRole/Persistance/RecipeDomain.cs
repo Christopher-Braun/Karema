@@ -87,7 +87,10 @@ namespace Mvc4WebRole
         public void EditRecipe(RecipeModel recipemodel)
         {
             recipemodel.UpdateLastTimeChanged();
-            this.recipeDb.Ingredients.Where(t => t.RecipeModelID == recipemodel.ID).ForEach(t => this.recipeDb.Ingredients.Remove(t));
+            
+            var ingeredientsForRecipe = this.recipeDb.Ingredients.Where(t => t.RecipeModelID == recipemodel.ID).ToList();
+            ingeredientsForRecipe.ForEach(t => this.recipeDb.Ingredients.Remove(t));
+            
             recipemodel.Ingredients.ForEach(t => this.recipeDb.Ingredients.Add(t));
             SaveChangedRecipe(recipemodel);
         }

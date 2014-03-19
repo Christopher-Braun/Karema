@@ -5,9 +5,21 @@
 }
 
 <h2>@ViewBag.Title</h2>
+    
+
+@*<script type="text/javascript">
+    $(document).ready(function () {
+
+            var a = $("#t")[0];
+            var b = a.childNodes[0];
+            b.addClass('ui-btn-active');
+
+    });
+
+</script>*@
 
 <p>
-@Html.ActionLink("Schlagwörter verwalten", "Index","Tags")
+@Html.ActionLink("Tags verwalten", "Index","Tags")
 </p>
 
 <ul>
