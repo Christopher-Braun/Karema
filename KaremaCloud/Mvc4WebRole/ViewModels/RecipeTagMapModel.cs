@@ -6,7 +6,7 @@ namespace Mvc4WebRole.ViewModels
 {
     public class RecipeTagMapModel
     {
-        [Display(Name = "Schlagwörter")]
+        [Display(Name = "Tags")]
         public List<TagInfo> TagInfos
         {
             get;

@@ -208,6 +208,33 @@ ul#menu {
             text-decoration: none;
         }
 
+		/* menu2
+----------------------------------------------------------*/
+ul#menu2 {
+    font-size: 1.3em;
+    font-weight: 600;
+    margin: 15px 0 10px;
+    padding: 0;
+    text-align: center;
+}
+
+    ul#menu2 li {
+        display: inline;
+        list-style: none;
+        padding-left: 15px; 
+    }
+
+        ul#menu2 li a {
+            background: none;
+            color: #3388cc;
+            text-decoration: none;
+        }
+
+        ul#menu2 li a:hover {
+            color: #333;
+            text-decoration: none;
+        }
+
 
 /* page elements
 ----------------------------------------------------------*/

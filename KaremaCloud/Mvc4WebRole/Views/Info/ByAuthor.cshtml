@@ -6,23 +6,21 @@
     ViewBag.Title = "Autoren";
 }
 
-        <h2>@ViewBag.Title</h2>
+<ul>
 
-        <ul>
-
-        @foreach ( var item in Model )
-        {
-            <li>
+    @foreach ( var item in Model )
+    {
+        <li>
             @Html.DisplayFor(modelItem => item.Key)
             <ul>
-            @foreach ( var recipe in item )
-            {
-               <li>@Html.ActionLink(recipe.Name, "Details", "Recipe", new { id = recipe.ID }, new { }) </li>
-            }
+                @foreach ( var recipe in item )
+                {
+                    <li>@Html.ActionLink(recipe.Name, "Details", "Recipe", new { id = recipe.ID }, new { }) </li>
+                }
             </ul>
 
-            </li>
-        }
+        </li>
+    }
 
-        </ul>
+</ul>
 

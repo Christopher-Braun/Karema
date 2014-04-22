@@ -30,7 +30,7 @@ namespace Mvc4WebRole.Models
             set;
         }
 
-        [Display(Name = "Schlagwörter")]
+        [Display(Name = "Tags")]
         public virtual List<TagModel> Tags
         {
             get;

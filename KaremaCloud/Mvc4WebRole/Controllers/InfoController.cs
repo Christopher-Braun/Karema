@@ -41,14 +41,14 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult LastChanged()
         {
-            ViewBag.Title = "Zuletzt geändert";
+            ViewBag.Title = "Letzte Änderungen";
             IEnumerable<RecipeModel> recipes = repository.Recipes.ToList().OrderByDescending(r => r.LastTimeChanged);
             return View("ByDate", recipes);
         }
 
         public ActionResult LastCreated()
         {
-            ViewBag.Title = "Zuletzt erstellt";
+            ViewBag.Title = "Neueste Rezepte";
             IEnumerable<RecipeModel> recipes = repository.Recipes.ToList().OrderByDescending(r => r.TimeCreated);
             return View("ByDate", recipes);
         }

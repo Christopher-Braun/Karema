@@ -562,9 +562,9 @@
     <Content Include="Views\Account\AccessDenied.cshtml" />
     <Content Include="Views\Account\NoAccess.cshtml" />
     <Content Include="Views\Info\ByAuthor.cshtml" />
-    <Content Include="Views\Shared\_MobileTitle.cshtml" />
     <Content Include="Views\Shared\_Title.cshtml" />
     <Content Include="Views\Account\Account.cshtml" />
+    <Content Include="Views\Shared\_Home.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,29 +1,15 @@
 ﻿@model IEnumerable<Mvc4WebRole.Models.TagModel>
 
 @{
-    ViewBag.Title = "Schlagwörter";
+    ViewBag.Title = "Tags";
 }
-
-<h2>@ViewBag.Title</h2>
-    
-
-@*<script type="text/javascript">
-    $(document).ready(function () {
-
-            var a = $("#t")[0];
-            var b = a.childNodes[0];
-            b.addClass('ui-btn-active');
-
-    });
-
-</script>*@
+  
 
 <p>
 @Html.ActionLink("Tags verwalten", "Index","Tags")
 </p>
 
 <ul>
-
     @foreach ( var item in Model )
     {
         <li>
@@ -39,7 +25,5 @@
     }
 
 </ul>
+    
 
-<p>
-    @Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
-</p>

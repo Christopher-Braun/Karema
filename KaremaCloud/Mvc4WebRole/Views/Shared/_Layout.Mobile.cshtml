@@ -59,7 +59,16 @@
 
     <body>
         <header>
-            <div class="content-wrapper">
+            
+            <nav>
+                <ul id="menu2">
+                    <li>@Html.ActionLink("Rezepte", "Index", "Recipe")</li>
+                    <li>@Html.ActionLink("Tags", "Overview", "Tags")</li>
+                    <li>@Html.ActionLink("Info", "Index", "Info")</li>
+                </ul>
+            </nav>
+
+            @*<div class="content-wrapper">
                 <div data-role="navbar">
                     <ul>
                         <li>@Html.ActionLink("Rezepte", "Index", "Recipe")</li>
@@ -67,13 +76,15 @@
                         <li>@Html.ActionLink("Info", "Index", "Info")</li>
                     </ul>
                 </div>
-            </div>
+            </div>*@
 
         </header>
         <div id="body">
             @RenderSection("featured", required: false)
             <section class="content-wrapper main-content clear-fix">
+                @Html.Partial("_Title")
                 @RenderBody()
+                @Html.Partial("_Home")
             </section>
         </div>
 

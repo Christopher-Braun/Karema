@@ -4,32 +4,27 @@
     ViewBag.Title = "Info";
 }
 
-<h2>@ViewBag.Title</h2>
 
+<p>
     @Html.Partial("_LoginPartial")
-
-
-<p>
-    @Html.ActionLink("Übersicht", "Overview")
-</p>
-
-<p>
-    @Html.ActionLink("Anwender", "UserOverview", "Account",null,null)
-</p>
-
-<p>
-    @Html.ActionLink("Logs", "Logs")
 </p>
 
 <p>
     @Html.ActionLink("Autoren", "ByAuthor")
 </p>
 <p>
-    @Html.ActionLink("Zuletzt geändert", "LastChanged")
+    @Html.ActionLink("Letzte Änderungen", "LastChanged")
 </p>
 <p>
-    @Html.ActionLink("Zuletzt erstellt", "LastCreated")
+    @Html.ActionLink("Neueste Rezepte", "LastCreated")
 </p>
 <p>
-    @Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
+    @Html.ActionLink("Anwender", "UserOverview", "Account", null, null)
 </p>
+<p>
+    @Html.ActionLink("Übersicht", "Overview")
+</p>
+<p>
+    @Html.ActionLink("Logs", "Logs")
+</p>
+

@@ -95,8 +95,8 @@
 <input id="personCount" type="number" data-type="range" data-highlight="true" value="@Model.DefaultPersonCount" name="personCount" min="1" max="12" data-val-required="The Personenzahl field is required." data-val-number="The field Personenzahl must be a number." data-val="true">
 
 <p>
-    <div data-role="collapsible" data-iconpos="right" data-mini="true">
-        <h3>Meta-Info</h3>
+    <div data-role="collapsible" data-mini="true" data-collapsed-icon="comment" data-expanded-icon="comment">
+        <h3>Rezept-Info</h3>
         <table>
             <tr>
                 <td>
@@ -129,23 +129,20 @@
     </div>
 </p>
 
-@{
+@*@{
     String imageLinkTitle = Model.HasImage ? "Bild" : "Bild hinzufügen";
-}
+}*@
 
-<p>
+@*<p>
     @Html.ActionLink(imageLinkTitle, "Details", "RecipeImage", new { id = Model.ID }, null)
-</p>
+</p>*@
 
 <p>
     @Html.ActionLink("Bearbeiten", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Schlagworte zuweisen", "AssignTags", "Tags", new { id = Model.ID }, new object()) |
+    @Html.ActionLink("Tags zuweisen", "AssignTags", "Tags", new { id = Model.ID }, new object()) |
     @Html.ActionLink("Löschen", "Delete", new { id = Model.ID })
 </p>
 
-<p>
-    @Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
-</p>
 
 
 

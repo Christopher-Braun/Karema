@@ -1,7 +1,7 @@
 ﻿@model Mvc4WebRole.ViewModels.RecipeTagMapModel
 
 @{
-    ViewBag.Title = "Schlagwörter zuweisen";
+    ViewBag.Title = "Tags zuweisen";
 }
 
 
@@ -11,9 +11,6 @@
     @Html.ValidationSummary(true)
 
     @Html.HiddenFor(model => model.RecipeID)
-
-
-    <h2>@ViewBag.Title</h2>
 
     <h3>
         @Html.DisplayNameFor(model => model.RecipeName) : @Html.DisplayFor(model => model.RecipeName)
@@ -34,12 +31,12 @@
 }
 
 <p>
-    @Html.ActionLink("Schlagwörter verwalten", "Index")
+    @Html.ActionLink("Tags verwalten", "Index")
 </p>
 
 
 <p>
-    @Html.ActionLink("Abbrechen", "Details", "Recipe", new { ID = Model.RecipeID }, new object()) |@Html.ActionLink("Zurück zur Startseite", "Index", "Recipe")
+    @Html.ActionLink("Abbrechen", "Details", "Recipe", new { ID = Model.RecipeID }, new object())
 </p>
 
 

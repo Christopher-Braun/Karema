@@ -1,24 +1,23 @@
 ﻿@model IEnumerable<Mvc4WebRole.Models.RecipeModel>
 
-    <h2>@ViewBag.Title</h2>
-
-    <table>
-        <thead>
-            <tr>
-                <td>@Html.DisplayNameFor(model => model.Name)  </td>
-                <td>@Html.DisplayNameFor(model => model.LastTimeChanged)  </td>
-                  <td>@Html.DisplayNameFor(model => model.TimeCreated)  </td>
-                 <td>@Html.DisplayNameFor(model => model.Author)  </td>
-            </tr>
-        </thead>
-        @foreach ( var item in Model )
+<table>
+    <thead>
+        <tr>
+            <td>@Html.DisplayNameFor(model => model.Name)  </td>
+            <td>@Html.DisplayNameFor(model => model.LastTimeChanged)  </td>
+            <td>@Html.DisplayNameFor(model => model.TimeCreated)  </td>
+            <td>@Html.DisplayNameFor(model => model.Author)  </td>
+        </tr>
+    </thead>
+    @foreach ( var item in Model )
     {
-            <tr>
-                <td> @Html.ActionLink(item.Name, "Details", "Recipe", new { id = item.ID }, new { }) </td>
-                <td> @Html.DisplayFor(model => item.LastTimeChanged) </td>
-                   <td> @Html.DisplayFor(model => item.TimeCreated) </td>
-                 <td> @Html.DisplayFor(model => item.Author) </td>
-            </tr>
+        <tr>
+            <td> @Html.ActionLink(item.Name, "Details", "Recipe", new { id = item.ID }, new { }) </td>
+            <td> @Html.DisplayFor(model => item.LastTimeChanged) </td>
+            <td> @Html.DisplayFor(model => item.TimeCreated) </td>
+            <td> @Html.DisplayFor(model => item.Author) </td>
+        </tr>
     }
 
-    </table>
+</table>
+

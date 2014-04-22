@@ -5,17 +5,14 @@
 }
 
 
-<h2>@ViewBag.Title</h2>
-
 <p>
-    @Html.ActionLink("Neues Rezept", "Create")
+    @Html.ActionLink("Neues Rezept", "Create") |
+    @Html.ActionLink("Letzte Änderungen", "LastChanged","Info")
 </p>
 
  <form class="ui-filterable">
      <input type="search" id="filter-input" title="Suchen">
  </form>
-
-
   <ul data-role="listview" data-filter="true" data-input="#filter-input">
      @foreach (var item in Model)
     {

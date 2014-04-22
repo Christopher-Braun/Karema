@@ -19,7 +19,7 @@ namespace Mvc4WebRole.Models
         public virtual List<RecipeModel> Recipes { get; set; }
 
         [Required]
-        [Display(Name = "Schlagwort")]
+        [Display(Name = "Tag")]
         public String Caption { get; set; }
 
     }
