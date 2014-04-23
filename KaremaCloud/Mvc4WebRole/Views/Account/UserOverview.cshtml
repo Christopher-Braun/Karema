@@ -1,16 +1,22 @@
 ﻿@model IEnumerable<Mvc4WebRole.Models.UserProfile>
-    @{
-        ViewBag.Title = "Anwender";
-    }
 
-    <div data-role="content">
-        <p></p>
+@{
+    ViewBag.Title = "Anwender";
+}
 
-        <ul data-role="listview">
-            @foreach ( var item in Model )
-            {
-                <li data-icon="grid">@Html.ActionLink(item.UserName, "AssignRoles", new { userId = item.UserId }) </li>
-            }
-        </ul>
-    </div>
+@Html.Partial("_Title")
+    
+
+<div data-role="content">
+    <p></p>
+
+    <ul data-role="listview">
+        @foreach ( var item in Model )
+        {
+            <li data-icon="grid">@Html.ActionLink(item.UserName, "AssignRoles", new { userId = item.UserId }) </li>
+        }
+    </ul>
+</div>
+
+@Html.Partial("_Home")
 

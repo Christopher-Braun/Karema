@@ -62,8 +62,6 @@
 </style>
 
 
-
-
 <h2>@Html.DisplayFor(model => model.Name)</h2>
 
 <h3>@Html.DisplayNameFor(model => model.Description) </h3>
@@ -129,13 +127,13 @@
     </div>
 </p>
 
-@*@{
+@{
     String imageLinkTitle = Model.HasImage ? "Bild" : "Bild hinzufügen";
-}*@
+}
 
-@*<p>
+<p>
     @Html.ActionLink(imageLinkTitle, "Details", "RecipeImage", new { id = Model.ID }, null)
-</p>*@
+</p>
 
 <p>
     @Html.ActionLink("Bearbeiten", "Edit", new { id = Model.ID }) |
@@ -143,6 +141,6 @@
     @Html.ActionLink("Löschen", "Delete", new { id = Model.ID })
 </p>
 
-
+@Html.Partial("_Home")
 
 

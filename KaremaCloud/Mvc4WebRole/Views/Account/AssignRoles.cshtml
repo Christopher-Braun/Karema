@@ -4,6 +4,8 @@
     ViewBag.Title = "Rollen zuweisen";
 }
 
+@Html.Partial("_Title")
+
 <h2>AssignRoles for @Model.UserName</h2>
 
 @using ( Html.BeginForm() )
@@ -28,3 +30,5 @@
     </p>
 
 }
+
+@Html.Partial("_Home")

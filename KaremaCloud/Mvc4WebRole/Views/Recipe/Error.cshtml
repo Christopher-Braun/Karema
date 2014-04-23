@@ -4,6 +4,8 @@
     ViewBag.Title = "Fehler";
 }
 
+@Html.Partial("_Title")
+
 <div>
     @Html.DisplayNameFor(m => m.Message)
     @Html.DisplayFor(m => m.Message)
@@ -12,4 +14,4 @@
 
 </div>
 
-
+@Html.Partial("_Home")

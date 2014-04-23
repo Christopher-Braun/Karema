@@ -4,6 +4,8 @@
     ViewBag.Title = "Tag erstellen";
 }
 
+@Html.Partial("_Title")
+
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -12,16 +14,16 @@
     <fieldset>
         <legend>TagModel</legend>
 
-        <div class="editor-label">
+        <div>
             @Html.LabelFor(model => model.Caption)
         </div>
-        <div class="editor-field">
+        <div>
             @Html.EditorFor(model => model.Caption)
             @Html.ValidationMessageFor(model => model.Caption)
         </div>
 
         <p>
-                    <button data-icon="delete" type="submit">Erstellen</button>
+           <button data-icon="create" type="submit">Erstellen</button>
         </p>
     </fieldset>
 }
@@ -30,6 +32,6 @@
     @Html.ActionLink("Zurück", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Html.Partial("_Home")   
+
+

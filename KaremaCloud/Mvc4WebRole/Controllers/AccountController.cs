@@ -66,6 +66,7 @@ namespace Mvc4WebRole.Controllers
                 using ( var ctx = new UsersContext() )
                 {
                     var user = ctx.UserProfiles.Find(userWithRoles.UserID);
+            //      ctx.UserProfiles.Remove()
                     userName = user.UserName;
                 }
 

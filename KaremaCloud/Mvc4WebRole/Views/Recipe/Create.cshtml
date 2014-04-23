@@ -4,6 +4,8 @@
     ViewBag.Title = "Neues Rezept";
 }
 
+@Html.Partial("_Title")
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -26,3 +28,4 @@
         @Html.ActionLink("Abbrechen", "Index")
     </p>
 </div>
+

@@ -5,7 +5,7 @@
     ViewBag.Title = "Vorschau";
 }
 
-
+@Html.Partial("_Title")
 
 <script type="text/javascript">
 
@@ -49,7 +49,7 @@
     </p>
 }
 
-@using (Html.BeginForm("SetRecipeImage", "RecipeImage", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("SetRecipeImage", "RecipeImage", FormMethod.Post, new { enctype = "multipart/form-data", @data_ajax = "false" }))
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
@@ -65,3 +65,8 @@
     </p>
 }
 
+<p>
+    @Html.ActionLink("Abbrechen", "Details", new { Model.ID })
+</p>
+
+@Html.Partial("_Home")

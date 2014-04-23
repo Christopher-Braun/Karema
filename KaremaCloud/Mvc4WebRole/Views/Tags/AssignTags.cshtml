@@ -4,6 +4,8 @@
     ViewBag.Title = "Tags zuweisen";
 }
 
+@Html.Partial("_Title")
+
 
 @using ( Html.BeginForm() )
 {
@@ -38,6 +40,8 @@
 <p>
     @Html.ActionLink("Abbrechen", "Details", "Recipe", new { ID = Model.RecipeID }, new object())
 </p>
+
+@Html.Partial("_Home")
 
 
 

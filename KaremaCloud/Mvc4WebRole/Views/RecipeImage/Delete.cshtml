@@ -4,8 +4,10 @@
     ViewBag.Title = "Bild Löschen";
 }
 
+@Html.Partial("_Title")
 
-<h2>Wollen Sie das Bild wirklich löschen?</h2>
+
+<h3>Wollen Sie das Bild wirklich löschen?</h3>
 
 @using (Html.BeginForm())
 {
@@ -15,4 +17,6 @@
         @Html.ActionLink("Abbrechen", "Details", "Recipe", new { Model.ID }, null)
     </p>
 }
+
+@Html.Partial("_Home")
 

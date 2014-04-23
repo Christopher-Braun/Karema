@@ -4,6 +4,8 @@
     ViewBag.Title = "Tag bearbeiten";
 }
 
+@Html.Partial("_Title")
+
 
 @using ( Html.BeginForm() )
 {
@@ -30,9 +32,7 @@
 }
 
 <div>
-    @Html.ActionLink("Zurück", "Index")
+    @Html.ActionLink("Abbrechen", "Index")
 </div>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+@Html.Partial("_Home")

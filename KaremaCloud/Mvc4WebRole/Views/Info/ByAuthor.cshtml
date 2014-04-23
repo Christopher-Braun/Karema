@@ -1,10 +1,11 @@
-﻿@using System.Collections
-@using Mvc4WebRole.Models
+﻿@using Mvc4WebRole.Models
 @model IEnumerable<IGrouping<string,RecipeModel>>
 
 @{
     ViewBag.Title = "Autoren";
 }
+    
+@Html.Partial("_Title")
 
 <ul>
 
@@ -23,4 +24,7 @@
     }
 
 </ul>
+    
+    
+@Html.Partial("_Home")
 

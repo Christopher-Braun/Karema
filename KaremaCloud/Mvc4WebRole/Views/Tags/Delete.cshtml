@@ -4,7 +4,7 @@
     ViewBag.Title = "Tag löschen";
 }
 
-
+@Html.Partial("_Title")
 
 <h3>Wollen Sie den Tag "@Model.Caption" wirklich löschen ?</h3>
 
@@ -22,10 +22,10 @@
     @Html.AntiForgeryToken()
     <p>
         <button data-icon="delete" type="submit">Löschen</button>
-        
-     
     </p>
     <div>
-    @Html.ActionLink("Zurück", "Index")
+    @Html.ActionLink("Abbrechen", "Index")
 </div>
 }
+
+@Html.Partial("_Home")

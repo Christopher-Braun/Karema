@@ -58,12 +58,9 @@
     <div id="body">
         @RenderSection("featured", required: false)
         <section class="content-wrapper main-content clear-fix">
-            @Html.Partial("_Title")
             @RenderBody()
-            @Html.Partial("_Home")
         </section>
     </div>
-
 
 
     <footer data-role="footer">

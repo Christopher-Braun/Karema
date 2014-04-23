@@ -3,8 +3,9 @@
     ViewBag.Title = "Übersicht";
 }
 
-<table>
+@Html.Partial("_Title")
 
+<table>
     <tr>
         <td>Rezepte</td>
         <td>@ViewBag.Recipes</td>
@@ -22,6 +23,8 @@
         <td>@ViewBag.Users</td>
     </tr>
 </table>
+
+@Html.Partial("_Home")
 
 
 

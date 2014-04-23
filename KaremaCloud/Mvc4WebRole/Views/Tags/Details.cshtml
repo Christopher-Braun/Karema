@@ -1,9 +1,10 @@
 ﻿@model Mvc4WebRole.Models.TagModel
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Tag Details";
 }
 
+@Html.Partial("_Title")
 
 <h3>@Html.DisplayFor(model => model.Caption) </h3>
 
@@ -22,3 +23,5 @@
 <div>
     @Html.ActionLink("Zurück", "Index")
 </div>
+
+@Html.Partial("_Home")
