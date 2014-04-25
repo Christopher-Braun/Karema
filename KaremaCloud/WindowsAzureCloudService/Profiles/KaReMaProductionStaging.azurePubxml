@@ -3,7 +3,7 @@
   <PropertyGroup>
     <AzureCredentials>{"ServiceManagementEndpoint":"https:\/\/management.core.windows.net\/","SubscriptionId":"4eacec58-018d-4e5b-82f1-2417d19722d7"}</AzureCredentials>
     <AzureDeleteDeploymentOnFailure>False</AzureDeleteDeploymentOnFailure>
-    <AzureDeploymentLabel>Test</AzureDeploymentLabel>
+    <AzureDeploymentLabel>T</AzureDeploymentLabel>
     <AzureDeploymentReplacementMethod>DeleteAndCreate</AzureDeploymentReplacementMethod>
     <AzureSlot>Staging</AzureSlot>
     <AzureEnableRemoteDesktop>False</AzureEnableRemoteDesktop>

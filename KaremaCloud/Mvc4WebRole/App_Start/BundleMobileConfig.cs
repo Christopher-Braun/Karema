@@ -6,8 +6,6 @@ namespace Mvc4WebRole
     {
         public static void RegisterBundles(BundleCollection bundles)
         {
-            //bundles.Add(new StyleBundle("~/Content/Mobile/css")
-            //    .Include("~/Content/Site.Mobile.css"));
         }
     }
 }

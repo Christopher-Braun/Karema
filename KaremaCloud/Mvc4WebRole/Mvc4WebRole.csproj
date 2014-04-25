@@ -219,6 +219,7 @@
     <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\ViewSwitcherController.cs" />
+    <Compile Include="Filters\SingleMultiCultureModelBinder.cs" />
     <Compile Include="Filters\EnhancedAuthorize.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -502,6 +503,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\jQueryFix.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

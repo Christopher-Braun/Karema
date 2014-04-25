@@ -1,9 +1,13 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
+using System.Globalization;
+using System.Threading;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
+using Mvc4WebRole.Filters;
 using Mvc4WebRole.Migrations;
 using WebMatrix.WebData;
 
@@ -19,12 +23,19 @@ namespace Mvc4WebRole
         {
             SessionLogger.AddLogInit("Application_Start");
 
+            var germanCulture = new CultureInfo("de-DE");
+            Thread.CurrentThread.CurrentCulture = germanCulture;
+            Thread.CurrentThread.CurrentUICulture = germanCulture;
+
+
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeDbContext, Configuration>());
 
             AreaRegistration.RegisterAllAreas();
+
+           ModelBinders.Binders.Add(typeof(Single), new SingleMultiCultureModelBinder());
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
