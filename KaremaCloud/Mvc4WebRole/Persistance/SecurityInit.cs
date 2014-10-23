@@ -31,14 +31,18 @@ namespace Mvc4WebRole
 
             try
             {
-                if (WebSecurity.UserExists("Administrator"))
+                if (WebSecurity.UserExists("Test"))
                 {
                     using (var ctx = new UsersContext())
                     {
-                        var admin = ctx.UserProfiles.FirstOrDefault(t => t.UserName == "Administrator");
+                        var admin = ctx.UserProfiles.FirstOrDefault(t => t.UserName == "Test");
                         if (admin != null)
                             ctx.UserProfiles.Remove(admin);
+
+                        ctx.SaveChanges();
                     }
+
+                   
                 }
 
                 //if ( srp.RoleExists("Admin") )

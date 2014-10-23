@@ -19,7 +19,7 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Overview()
         {
-            using ( var ctx = new UsersContext() )
+            using (var ctx = new UsersContext())
             {
                 var userList = ctx.UserProfiles.ToList();
                 ViewBag.Users = userList.Count();
@@ -53,11 +53,13 @@ namespace Mvc4WebRole.Controllers
             return View("ByDate", recipes);
         }
 
+        [EnhancedAuthorize(Users = "Admin")]
         public ActionResult Logs()
         {
             return View(SessionLogger.Logs);
         }
 
+        [EnhancedAuthorize(Users = "Admin")]
         public ActionResult DeleteLogs()
         {
             SessionLogger.Logs.Clear();

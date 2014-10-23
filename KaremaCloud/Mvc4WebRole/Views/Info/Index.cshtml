@@ -12,20 +12,26 @@
 </p>
 
 <p>
-    @Html.ActionLink("Autoren", "ByAuthor")
+    @Html.ActionLink("Übersicht", "Overview")
 </p>
-<p>
-    @Html.ActionLink("Letzte Änderungen", "LastChanged")
-</p>
+
 <p>
     @Html.ActionLink("Neueste Rezepte", "LastCreated")
 </p>
 <p>
+    @Html.ActionLink("Letzte Änderungen", "LastChanged")
+</p>
+
+<p>
+    @Html.ActionLink("Autoren", "ByAuthor")
+</p>
+
+<label>Admin-Bereich</label>
+
+<p>
     @Html.ActionLink("Anwender", "UserOverview", "Account", null, null)
 </p>
-<p>
-    @Html.ActionLink("Übersicht", "Overview")
-</p>
+
 <p>
     @Html.ActionLink("Logs", "Logs")
 </p>

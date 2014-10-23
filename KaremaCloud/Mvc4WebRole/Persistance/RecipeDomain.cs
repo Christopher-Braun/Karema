@@ -79,6 +79,9 @@ namespace Mvc4WebRole
         {
             recipemodel.ID = Guid.NewGuid();
             recipemodel.Author = WebSecurity.CurrentUserName;
+            recipemodel.TimeCreated = DateTime.UtcNow;
+            recipemodel.LastTimeChanged = DateTime.UtcNow;
+
             OrderIngredients(recipemodel);
             this.recipeDb.Recipes.Add(recipemodel);
             this.recipeDb.SaveChanges();
@@ -86,7 +89,7 @@ namespace Mvc4WebRole
 
         public void EditRecipe(RecipeModel recipemodel)
         {
-            recipemodel.UpdateLastTimeChanged();
+            recipemodel.LastTimeChanged  = DateTime.UtcNow;
             
             var ingeredientsForRecipe = this.recipeDb.Ingredients.Where(t => t.RecipeModelID == recipemodel.ID).ToList();
             ingeredientsForRecipe.ForEach(t => this.recipeDb.Ingredients.Remove(t));

@@ -12,7 +12,7 @@ using Mvc4WebRole.Models;
 namespace Mvc4WebRole.Controllers
 {
     [Authorize]
- //   [InitializeSimpleMembership]
+    //   [InitializeSimpleMembership]
     public class AccountController : Controller
     {
         [AllowAnonymous]
@@ -27,10 +27,10 @@ namespace Mvc4WebRole.Controllers
             return View();
         }
 
-
+        [EnhancedAuthorize(Users = "Admin")]
         public ActionResult UserOverview()
         {
-            using ( var ctx = new UsersContext() )
+            using (var ctx = new UsersContext())
             {
                 var userList = ctx.UserProfiles.ToList();
                 return View(userList);
@@ -40,7 +40,7 @@ namespace Mvc4WebRole.Controllers
         [EnhancedAuthorize(Users = "Admin")]
         public ActionResult AssignRoles(int userId)
         {
-            using ( var ctx = new UsersContext() )
+            using (var ctx = new UsersContext())
             {
                 var user = ctx.UserProfiles.Find(userId);
 
@@ -60,13 +60,13 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AssignRoles(UserWithRoles userWithRoles)
         {
-            if ( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
                 String userName;
-                using ( var ctx = new UsersContext() )
+                using (var ctx = new UsersContext())
                 {
                     var user = ctx.UserProfiles.Find(userWithRoles.UserID);
-            //      ctx.UserProfiles.Remove()
+                    //      ctx.UserProfiles.Remove()
                     userName = user.UserName;
                 }
 
@@ -76,11 +76,11 @@ namespace Mvc4WebRole.Controllers
                 {
                     var isRoleAssigned = roleProvider.IsUserInRole(userName, roleInfo.RoleName);
 
-                    if ( roleInfo.IsChecked && !isRoleAssigned )
+                    if (roleInfo.IsChecked && !isRoleAssigned)
                     {
                         roleProvider.AddUsersToRoles(new[] { userName }, new[] { roleInfo.RoleName });
                     }
-                    else if ( !roleInfo.IsChecked && isRoleAssigned )
+                    else if (!roleInfo.IsChecked && isRoleAssigned)
                     {
                         roleProvider.RemoveUsersFromRoles(new[] { userName }, new[] { roleInfo.RoleName });
                     }
@@ -113,7 +113,7 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(LoginModel model, string returnUrl)
         {
-            if ( ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe) )
+            if (ModelState.IsValid && WebSecurity.Login(model.UserName, model.Password, persistCookie: model.RememberMe))
             {
                 SessionLogger.AddLog("User " + model.UserName + " logged in");
                 return RedirectToLocal(returnUrl);
@@ -152,7 +152,7 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Register(RegisterModel model)
         {
-            if ( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
                 // Attempt to register the user
                 try
@@ -164,7 +164,7 @@ namespace Mvc4WebRole.Controllers
 
                     return RedirectToAction("NoAccess");
                 }
-                catch ( MembershipCreateUserException e )
+                catch (MembershipCreateUserException e)
                 {
                     ModelState.AddModelError("", ErrorCodeToString(e.StatusCode));
                 }
@@ -185,13 +185,13 @@ namespace Mvc4WebRole.Controllers
             ManageMessageId? message = null;
 
             // Only disassociate the account if the currently logged in user is the owner
-            if ( ownerAccount == User.Identity.Name )
+            if (ownerAccount == User.Identity.Name)
             {
                 // Use a transaction to prevent the user from deleting their last login credential
-                using ( var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }) )
+                using (var scope = new TransactionScope(TransactionScopeOption.Required, new TransactionOptions { IsolationLevel = IsolationLevel.Serializable }))
                 {
                     bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
-                    if ( hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1 )
+                    if (hasLocalAccount || OAuthWebSecurity.GetAccountsFromUserName(User.Identity.Name).Count > 1)
                     {
                         OAuthWebSecurity.DeleteAccount(provider, providerUserId);
                         scope.Complete();
@@ -228,9 +228,9 @@ namespace Mvc4WebRole.Controllers
             bool hasLocalAccount = OAuthWebSecurity.HasLocalAccount(WebSecurity.GetUserId(User.Identity.Name));
             ViewBag.HasLocalPassword = hasLocalAccount;
             ViewBag.ReturnUrl = Url.Action("Manage");
-            if ( hasLocalAccount )
+            if (hasLocalAccount)
             {
-                if ( ModelState.IsValid )
+                if (ModelState.IsValid)
                 {
                     // ChangePassword will throw an exception rather than return false in certain failure scenarios.
                     bool changePasswordSucceeded;
@@ -238,12 +238,12 @@ namespace Mvc4WebRole.Controllers
                     {
                         changePasswordSucceeded = WebSecurity.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword);
                     }
-                    catch ( Exception )
+                    catch (Exception)
                     {
                         changePasswordSucceeded = false;
                     }
 
-                    if ( changePasswordSucceeded )
+                    if (changePasswordSucceeded)
                     {
                         return RedirectToAction("Manage", new { Message = ManageMessageId.ChangePasswordSuccess });
                     }
@@ -258,19 +258,19 @@ namespace Mvc4WebRole.Controllers
                 // User does not have a local password so remove any validation errors caused by a missing
                 // OldPassword field
                 ModelState state = ModelState["OldPassword"];
-                if ( state != null )
+                if (state != null)
                 {
                     state.Errors.Clear();
                 }
 
-                if ( ModelState.IsValid )
+                if (ModelState.IsValid)
                 {
                     try
                     {
                         WebSecurity.CreateAccount(User.Identity.Name, model.NewPassword);
                         return RedirectToAction("Manage", new { Message = ManageMessageId.SetPasswordSuccess });
                     }
-                    catch ( Exception )
+                    catch (Exception)
                     {
                         ModelState.AddModelError("", String.Format("Unable to create local account. An account with the name \"{0}\" may already exist.", User.Identity.Name));
                     }
@@ -281,11 +281,11 @@ namespace Mvc4WebRole.Controllers
             return View(model);
         }
 
-      
+
         #region Helpers
         private ActionResult RedirectToLocal(string returnUrl)
         {
-            if ( Url.IsLocalUrl(returnUrl) )
+            if (Url.IsLocalUrl(returnUrl))
             {
                 return Redirect(returnUrl);
             }
@@ -306,7 +306,7 @@ namespace Mvc4WebRole.Controllers
         {
             // See http://go.microsoft.com/fwlink/?LinkID=177550 for
             // a full list of status codes.
-            switch ( createStatus )
+            switch (createStatus)
             {
                 case MembershipCreateStatus.DuplicateUserName:
                 return "User name already exists. Please enter a different user name.";

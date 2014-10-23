@@ -62,17 +62,21 @@
 </style>
 
 
-<h2>@Html.DisplayFor(model => model.Name)</h2>
-
-<h3>@Html.DisplayNameFor(model => model.Description) </h3>
-
-
-@Html.Raw("<pre>" + Model.Description + "</pre>")
-
-<h3>@Html.DisplayNameFor(model => model.Ingredients)</h3>
-
 
 @Html.HiddenFor(model => model.DefaultPersonCount, new { id = "defaultPersonCount" })
+
+<h2>@Html.DisplayFor(model => model.Name)</h2>
+
+
+
+<h3>@Html.DisplayNameFor(model => model.DefaultPersonCount)</h3>
+
+<input id="personCount" type="number" data-type="range" data-highlight="true" value="@Model.DefaultPersonCount" name="personCount" min="1" max="12" data-val-required="The Personenzahl field is required." data-val-number="The field Personenzahl must be a number." data-val="true">
+
+
+
+
+<h3>@Html.DisplayNameFor(model => model.Ingredients)</h3>
 
 <ul>
 
@@ -88,9 +92,13 @@
     }
 </ul>
 
-<h3>@Html.DisplayNameFor(model => model.DefaultPersonCount)</h3>
 
-<input id="personCount" type="number" data-type="range" data-highlight="true" value="@Model.DefaultPersonCount" name="personCount" min="1" max="12" data-val-required="The Personenzahl field is required." data-val-number="The field Personenzahl must be a number." data-val="true">
+
+<h3>@Html.DisplayNameFor(model => model.Description) </h3>
+
+
+@Html.Raw("<pre>" + Model.Description + "</pre>")
+
 
 <p>
     <div data-role="collapsible" data-mini="true" data-collapsed-icon="comment" data-expanded-icon="comment">

@@ -97,14 +97,6 @@
     </div>
 
     <div>
-        <h3>@Html.LabelFor(model => model.Description)</h3>
-    </div>
-    <div>
-        @Html.EditorFor(model => model.Description)
-        @Html.ValidationMessageFor(model => model.Description)
-    </div>
-
-    <div>
         <h3>@Html.LabelFor(model => model.DefaultPersonCount)</h3>
     </div>
 
@@ -157,7 +149,19 @@
 
 
     </table>
-
+    
     <button id="btnAdd" type="button" data-icon="plus">Zutat hinzufügen </button>
+    
+
+    <div>
+        <h3>@Html.LabelFor(model => model.Description)</h3>
+    </div>
+    <div>
+        @Html.EditorFor(model => model.Description)
+        @Html.ValidationMessageFor(model => model.Description)
+    </div>
+
+
+
 </div>
 

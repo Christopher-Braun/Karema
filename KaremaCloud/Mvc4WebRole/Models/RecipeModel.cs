@@ -13,8 +13,6 @@ namespace Mvc4WebRole.Models
             this.ID = Guid.NewGuid();
             this.Ingredients = new List<IngredientModel>();
             this.Tags = new List<TagModel>();
-            this.TimeCreated = DateTime.Now;
-            UpdateLastTimeChanged();
         }
 
         public Guid ID
@@ -100,11 +98,6 @@ namespace Mvc4WebRole.Models
         {
             get;
             set;
-        }
-
-        public void UpdateLastTimeChanged()
-        {
-            this.LastTimeChanged = DateTime.Now;
         }
 
         public Boolean HasImage
