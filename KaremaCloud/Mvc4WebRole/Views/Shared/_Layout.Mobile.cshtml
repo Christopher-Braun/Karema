@@ -38,8 +38,7 @@
         <footer data-role="footer">
             <div class="content-wrapper">
                 <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Karema mobile</p>
-                    @Html.Partial("_Impressum")
+                    <p>&copy; @DateTime.Now.Year - Karema mobile | @Html.ActionLink("Impressum", "Impressum", "Info") </p>
                 </div>
             </div>
         </footer>

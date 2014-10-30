@@ -39,6 +39,12 @@ namespace Mvc4WebRole.Controllers
             return View(recipes);
         }
 
+         [AllowAnonymous]
+        public ActionResult Impressum()
+        {
+            return View( );
+        }
+
         public ActionResult LastChanged()
         {
             ViewBag.Title = "Letzte Änderungen";

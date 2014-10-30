@@ -6,67 +6,67 @@
     <meta name="viewport" content="width=device-width" />
 
 
-        @Styles.Render("~/Content/jquerymobile/css")
-        @Scripts.Render("~/bundles/jquery")
+    @Styles.Render("~/Content/jquerymobile/css")
+    @Scripts.Render("~/bundles/jquery")
 
     <script type="text/javascript">
         $(document).bind("mobileinit", function () { $.mobile.ajaxEnabled = false; });
     </script>
 
-        @Scripts.Render("~/bundles/jquerymobile")
-        @Styles.Render("~/Content/css")
-        @Scripts.Render("~/bundles/jqueryval")
-  
+    @Scripts.Render("~/bundles/jquerymobile")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jqueryval")
+
 
 </head>
-        <body>
-            <header>
-                <div  class="content-wrapper">
-                    <div class="float-left">
-                        <p class="site-title">@Html.ActionLink("Karema", "Index", "Recipe")</p>
-                    </div>
-                    <div class="float-right">
-                        <section id="login">
-                            @Html.Partial("_LoginPartial")
-                        </section>
-
-                        <nav>
-                            <ul id="menu">
-                                <li>@Html.ActionLink("Rezepte", "Index", "Recipe")</li>
-                                <li>@Html.ActionLink("Tags", "Overview", "Tags")</li>
-                                <li>@Html.ActionLink("Info", "Index", "Info")</li>
-                            </ul>
-                        </nav>
-
-                    </div>
-                </div>
-            </header>
-            <div id="body">
-                @RenderSection("featured", required: false)
-                <section class="content-wrapper main-content clear-fix">
-                    @RenderBody()
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("Karema", "Index", "Recipe")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
                 </section>
+
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Rezepte", "Index", "Recipe")</li>
+                        <li>@Html.ActionLink("Tags", "Overview", "Tags")</li>
+                        <li>@Html.ActionLink("Info", "Index", "Info")</li>
+                    </ul>
+                </nav>
+
             </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
 
 
-            <footer data-role="footer">
-                <div class="content-wrapper">
-                    <div class="float-left">
-                        <p>&copy; @DateTime.Now.Year - Karema</p>
-                        @Html.Partial("_Impressum")
-                       
-                    </div>
-                </div>
-            </footer>
-
-
-            <div class="content-wrapper">
-                <p />
-                @Html.Partial("_ViewSwitcher")
-                <p />
+    <footer data-role="footer">
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p> &copy; @DateTime.Now.Year - Karema | @Html.ActionLink("Impressum", "Impressum", "Info") </p>
             </div>
+        </div>
 
-            @RenderSection("scripts", required: false)
-        </body>
+    </footer>
 
-        </html>
+    <div></div>
+
+    <div class="content-wrapper">
+        <p />
+        @Html.Partial("_ViewSwitcher")
+        <p />
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+
+</html>
