@@ -11,7 +11,7 @@ namespace Mvc4WebRole
         public DbSet<ImageModel> ImageModels { get; set; }
 
         public RecipeDbContext()
-            : base("RecipeDataBase")
+            : base("DefaultConnection")
         {
          //   this.Database.Log = SessionLogger.AddLog;
         }
