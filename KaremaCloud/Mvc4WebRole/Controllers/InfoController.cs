@@ -7,7 +7,7 @@ using Mvc4WebRole.Models;
 
 namespace Mvc4WebRole.Controllers
 {
-    [EnhancedAuthorize(Roles = "Reader,Administrator")]
+    [EnhancedAuthorize(Roles = "Reader")]
     public class InfoController : Controller
     {
         private readonly RecipeDbContext repository = new RecipeDbContext();

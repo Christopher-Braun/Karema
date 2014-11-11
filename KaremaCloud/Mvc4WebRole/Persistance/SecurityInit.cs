@@ -31,29 +31,28 @@ namespace Mvc4WebRole
 
             try
             {
-                if (WebSecurity.UserExists("Test"))
-                {
-                    using (var ctx = new UsersContext())
-                    {
-                        var admin = ctx.UserProfiles.FirstOrDefault(t => t.UserName == "Test");
-                        if (admin != null)
-                            ctx.UserProfiles.Remove(admin);
+                //if (WebSecurity.UserExists("Test"))
+                //{
+                //    using (var ctx = new UsersContext())
+                //    {
+                //        var admin = ctx.UserProfiles.FirstOrDefault(t => t.UserName == "Test");
+                //        if (admin != null)
+                //            ctx.UserProfiles.Remove(admin);
 
-                        ctx.SaveChanges();
-                    }
+                //        ctx.SaveChanges();
+                //    }
 
                    
-                }
+                //}
 
                 //if ( srp.RoleExists("Admin") )
                 //{
                 //    srp.DeleteRole("Admin",false);
                 //}
 
-                //CreateRole(srp, "Administrator");
-                //CreateRole(srp, "Editor");
-                //CreateRole(srp, "Author");
-                //CreateRole(srp, "Reader");
+                CreateRole(srp, "Editor");
+                CreateRole(srp, "Author");
+                CreateRole(srp, "Reader");
             }
             catch (Exception e)
             {
