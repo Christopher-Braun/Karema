@@ -8,9 +8,9 @@ namespace Mvc4WebRole.Migrations
         public override void Up()
         {
             DropForeignKey("dbo.ImageModels", "RecipeModelID", "dbo.RecipeModels");
-            CreateIndex("dbo.IngredientModels", "RecipeModelID");
-            CreateIndex("dbo.RecipeTagMap", "RecipeID");
-            CreateIndex("dbo.RecipeTagMap", "TagID");
+            //CreateIndex("dbo.IngredientModels", "RecipeModelID");
+            //CreateIndex("dbo.RecipeTagMap", "RecipeID");
+            //CreateIndex("dbo.RecipeTagMap", "TagID");
             DropTable("dbo.ImageModels");
         }
         
@@ -26,9 +26,9 @@ namespace Mvc4WebRole.Migrations
                     })
                 .PrimaryKey(t => t.RecipeModelID);
             
-            DropIndex("dbo.RecipeTagMap", new[] { "TagID" });
-            DropIndex("dbo.RecipeTagMap", new[] { "RecipeID" });
-            DropIndex("dbo.IngredientModels", new[] { "RecipeModelID" });
+            //DropIndex("dbo.RecipeTagMap", new[] { "TagID" });
+            //DropIndex("dbo.RecipeTagMap", new[] { "RecipeID" });
+            //DropIndex("dbo.IngredientModels", new[] { "RecipeModelID" });
             AddForeignKey("dbo.ImageModels", "RecipeModelID", "dbo.RecipeModels", "ID");
         }
     }

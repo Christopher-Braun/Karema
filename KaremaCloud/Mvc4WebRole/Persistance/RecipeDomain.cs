@@ -100,7 +100,8 @@ namespace Mvc4WebRole
 
         public RecipeModel GetRecipe(Guid id)
         {
-            //Eager loading instead of lazy            //  return Recipes.Find(id); 
+            //Eager loading instead of lazy            
+            //  return Recipes.Find(id); 
             var recipe = this.recipeDb.Recipes.Include(x => x.Ingredients).Include(x => x.Tags).First(x => x.ID == id);
             recipe.Ingredients = recipe.Ingredients.OrderBy(i => i.Order).ToList();
             return recipe;

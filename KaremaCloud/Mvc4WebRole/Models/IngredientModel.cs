@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 
 namespace Mvc4WebRole.Models
@@ -10,6 +11,7 @@ namespace Mvc4WebRole.Models
         [Required]
         public Guid ID { get; set; }
 
+        [ForeignKey("RecipeModel")]
         public Guid RecipeModelID { get; set; }
 
         public virtual RecipeModel RecipeModel { get; set; }
