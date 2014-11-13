@@ -26,7 +26,6 @@ namespace Mvc4WebRole.Controllers
             }
             ViewBag.Recipes = repository.Recipes.Count();
             ViewBag.Tags = repository.Tags.Count();
-            ViewBag.Images = repository.ImageModels.Count();
 
             return View();
         }

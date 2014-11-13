@@ -7,85 +7,85 @@ using Mvc4WebRole.Models;
 
 namespace Mvc4WebRole.Controllers
 {
-    [EnhancedAuthorize(Roles = "Reader")]
-    public class RecipeImageController : Controller
-    {
-        private readonly RecipeDomain repository;
+    //[EnhancedAuthorize(Roles = "Reader")]
+    //public class RecipeImageController : Controller
+    //{
+    //    private readonly RecipeDomain repository;
 
-        public RecipeImageController()
-        {
-            repository = new RecipeDomain();
-        }
+    //    public RecipeImageController()
+    //    {
+    //        repository = new RecipeDomain();
+    //    }
 
-        [HttpGet]
-        public ActionResult Details(Guid id)
-        {
-            RecipeModel recipemodel = this.repository.GetRecipe(id);
-            if ( recipemodel == null )
-            {
-                return HttpNotFound();
-            }
+    //    [HttpGet]
+    //    public ActionResult Details(Guid id)
+    //    {
+    //        RecipeModel recipemodel = this.repository.GetRecipe(id);
+    //        if ( recipemodel == null )
+    //        {
+    //            return HttpNotFound();
+    //        }
 
-            return View(recipemodel);
-        }
+    //        return View(recipemodel);
+    //    }
 
-        [HttpGet]
-        public ActionResult GetRecipeImage(String id)
-        {
-            var imageModel = repository.GetRecipe(Guid.Parse(id)).ImageModel;
-            if ( imageModel == null )
-            {
-                return HttpNotFound();
-            }
+    //    [HttpGet]
+    //    public ActionResult GetRecipeImage(String id)
+    //    {
+    //        var imageModel = repository.GetRecipe(Guid.Parse(id)).ImageModel;
+    //        if ( imageModel == null )
+    //        {
+    //            return HttpNotFound();
+    //        }
 
-            return File(imageModel.Image, imageModel.MimeType);
-        }
+    //        return File(imageModel.Image, imageModel.MimeType);
+    //    }
 
 
-        [HttpPost]
-        public ActionResult SetRecipeImage(HttpPostedFileBase file, Guid id)
-        {
-            if ( !repository.CanChange(id) )
-            {
-                return RedirectToAction("AccessDenied", "Account");
-            }
+    //    [HttpPost]
+    //    public ActionResult SetRecipeImage(HttpPostedFileBase file, Guid id)
+    //    {
+    //        if ( !repository.CanChange(id) )
+    //        {
+    //            return RedirectToAction("AccessDenied", "Account");
+    //        }
 
-            if ( file == null || file.ContentLength == 0 )
-            {
-                return RedirectToAction("Details", new { id });
-            }
+    //        if ( file == null || file.ContentLength == 0 )
+    //        {
+    //            return RedirectToAction("Details", new { id });
+    //        }
 
-            using (var memoryStream = new MemoryStream())
-            {
-                file.InputStream.CopyTo(memoryStream);
-                this.repository.SetImage(id, memoryStream, file.ContentType);
-            }
+    //        using (var memoryStream = new MemoryStream())
+    //        {
+    //            file.InputStream.CopyTo(memoryStream);
+    //            this.repository.SetImage(id, memoryStream, file.ContentType);
+    //        }
 
-            return RedirectToAction("Details", new { id });
-        }
+    //        return RedirectToAction("Details", new { id });
+    //    }
 
-        public ActionResult Delete(Guid id)
-        {
-            if ( !repository.CanChange(id) )
-            {
-                return RedirectToAction("AccessDenied", "Account");
-            }
+    //    public ActionResult Delete(Guid id)
+    //    {
+    //        if ( !repository.CanChange(id) )
+    //        {
+    //            return RedirectToAction("AccessDenied", "Account");
+    //        }
 
-            var recipeModel = repository.GetRecipe(id);
-            if ( recipeModel == null )
-            {
-                return HttpNotFound();
-            }
+    //        var recipeModel = repository.GetRecipe(id);
+    //        if ( recipeModel == null )
+    //        {
+    //            return HttpNotFound();
+    //        }
 
-            return View(recipeModel);
-        }
+    //        return View(recipeModel);
+    //    }
 
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(Guid id)
-        {
-            repository.RemoveImage(id);
-            return RedirectToAction("Details", new { id });
-        }
-    }
+    //    [HttpPost, ActionName("Delete")]
+    //    [ValidateAntiForgeryToken]
+    //    public ActionResult DeleteConfirmed(Guid id)
+    //    {
+    //        repository.RemoveImage(id);
+    //        return RedirectToAction("Details", new { id });
+    //    }
+    //}
 }

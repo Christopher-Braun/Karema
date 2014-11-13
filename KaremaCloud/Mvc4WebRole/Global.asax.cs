@@ -31,7 +31,7 @@ namespace Mvc4WebRole
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
 
-            //        Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeDbContext, Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeDbContext, Configuration>());
 
             AreaRegistration.RegisterAllAreas();
 

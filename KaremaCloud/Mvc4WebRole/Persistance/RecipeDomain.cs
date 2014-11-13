@@ -43,37 +43,37 @@ namespace Mvc4WebRole
             return recipemodel.Author == WebSecurity.CurrentUserName;
         }
 
-        public void SetImage(Guid id, MemoryStream memoryStream, String contentType)
-        {
-            var recipeModel = this.recipeDb.Recipes.Find(id);
-            if ( recipeModel == null )
-            {
-                throw new InvalidOperationException();
-            }
+        //public void SetImage(Guid id, MemoryStream memoryStream, String contentType)
+        //{
+        //    var recipeModel = this.recipeDb.Recipes.Find(id);
+        //    if ( recipeModel == null )
+        //    {
+        //        throw new InvalidOperationException();
+        //    }
 
-            if ( recipeModel.ImageModel == null )
-            {
-                recipeModel.ImageModel = new ImageModel();
-            }
-            recipeModel.ImageModel.Image = memoryStream.ToArray();
-            recipeModel.ImageModel.MimeType = contentType;
+        //    if ( recipeModel.ImageModel == null )
+        //    {
+        //        recipeModel.ImageModel = new ImageModel();
+        //    }
+        //    recipeModel.ImageModel.Image = memoryStream.ToArray();
+        //    recipeModel.ImageModel.MimeType = contentType;
 
-            SaveChangedRecipe(recipeModel);
-        }
+        //    SaveChangedRecipe(recipeModel);
+        //}
 
-        public void RemoveImage(Guid id)
-        {
-            RecipeModel recipeModel = this.recipeDb.Recipes.Find(id);
+        //public void RemoveImage(Guid id)
+        //{
+        //    RecipeModel recipeModel = this.recipeDb.Recipes.Find(id);
 
-            if ( recipeModel == null )
-            {
-                throw new InvalidOperationException();
-            }
+        //    if ( recipeModel == null )
+        //    {
+        //        throw new InvalidOperationException();
+        //    }
 
-            recipeModel.ImageModel = null;
+        //    recipeModel.ImageModel = null;
 
-            this.SaveChangedRecipe(recipeModel);
-        }
+        //    this.SaveChangedRecipe(recipeModel);
+        //}
 
         public void Create(RecipeModel recipemodel)
         {

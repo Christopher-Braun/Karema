@@ -216,7 +216,6 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\InfoController.cs" />
-    <Compile Include="Controllers\RecipeImageController.cs" />
     <Compile Include="Controllers\RecipeController.cs" />
     <Compile Include="Controllers\TagsController.cs" />
     <Compile Include="Controllers\ViewSwitcherController.cs" />
@@ -241,8 +240,11 @@
     <Compile Include="Migrations\201401071527250_IngredientOrder.Designer.cs">
       <DependentUpon>201401071527250_IngredientOrder.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411131035235_RemoveImages.cs" />
+    <Compile Include="Migrations\201411131035235_RemoveImages.Designer.cs">
+      <DependentUpon>201411131035235_RemoveImages.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\ImageModel.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Persistance\RecipeDomain.cs" />
@@ -554,8 +556,6 @@
     <Content Include="Views\Tags\Delete.cshtml" />
     <Content Include="Views\Tags\Overview.cshtml" />
     <Content Include="Views\Recipe\Error.cshtml" />
-    <Content Include="Views\RecipeImage\Details.cshtml" />
-    <Content Include="Views\RecipeImage\Delete.cshtml" />
     <Content Include="Views\Shared\_ViewSwitcher.cshtml" />
     <Content Include="Views\Info\Index.cshtml" />
     <Content Include="Views\Info\ByDate.cshtml" />
@@ -590,6 +590,9 @@
     <EmbeddedResource Include="Migrations\201401071527250_IngredientOrder.resx">
       <DependentUpon>201401071527250_IngredientOrder.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411131035235_RemoveImages.resx">
+      <DependentUpon>201411131035235_RemoveImages.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -605,7 +608,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>8514</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
