@@ -31,11 +31,11 @@ namespace Mvc4WebRole
             ViewEngines.Engines.Clear();
             ViewEngines.Engines.Add(new RazorViewEngine());
 
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeDbContext, Configuration>());
+            //        Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeDbContext, Configuration>());
 
             AreaRegistration.RegisterAllAreas();
 
-           ModelBinders.Binders.Add(typeof(Single), new SingleMultiCultureModelBinder());
+            ModelBinders.Binders.Add(typeof(Single), new SingleMultiCultureModelBinder());
 
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
@@ -43,7 +43,7 @@ namespace Mvc4WebRole
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             BundleMobileConfig.RegisterBundles(BundleTable.Bundles);
-         
+
             SercurityInit.Init();
 
             SessionLogger.AddLogFinished("Application_Start");
