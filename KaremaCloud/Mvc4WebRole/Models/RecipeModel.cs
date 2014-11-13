@@ -35,13 +35,6 @@ namespace Mvc4WebRole.Models
             set;
         }
 
-        //[Display(Name = "Bild")]
-        //public virtual ImageModel ImageModel
-        //{
-        //    get;
-        //    set;
-        //}
-
         [MaxLength(50)]
         [Required]
         [Display(Name = "Name")]
@@ -99,13 +92,5 @@ namespace Mvc4WebRole.Models
             get;
             set;
         }
-
-        //public Boolean HasImage
-        //{
-        //    get
-        //    {
-        //        return ImageModel != null && ImageModel.HasImage;
-        //    }
-        //}
     }
 }

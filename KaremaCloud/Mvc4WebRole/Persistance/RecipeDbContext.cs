@@ -12,7 +12,7 @@ namespace Mvc4WebRole
         public RecipeDbContext()
             : base("DefaultConnection")
         {
-         //   this.Database.Log = SessionLogger.AddLog;
+            //   this.Database.Log = SessionLogger.AddLog;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -32,13 +32,6 @@ namespace Mvc4WebRole
                         mc.MapLeftKey("RecipeID");
                         mc.MapRightKey("TagID");
                     });
-
-            //Alternative zu Attributen
-            //modelBuilder.Entity<RecipeModel>()
-            //    .HasMany(p => p.Ingredients)
-            //    .WithRequired(i => i.RecipeModel);
         }
-
-       
     }
 }

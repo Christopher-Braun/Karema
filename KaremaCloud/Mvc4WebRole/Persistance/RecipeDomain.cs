@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.IO;
 using System.Linq;
 using System.Web.Security;
 using Mvc4WebRole.Models;
@@ -39,41 +38,9 @@ namespace Mvc4WebRole
                 return true;
             }
 
-            RecipeModel recipemodel = this.GetRecipe(recipeId);
-            return recipemodel.Author == WebSecurity.CurrentUserName;
+            var recipemodel = this.GetRecipe(recipeId);
+            return String.Compare(recipemodel.Author, WebSecurity.CurrentUserName,StringComparison.InvariantCultureIgnoreCase) ==0;
         }
-
-        //public void SetImage(Guid id, MemoryStream memoryStream, String contentType)
-        //{
-        //    var recipeModel = this.recipeDb.Recipes.Find(id);
-        //    if ( recipeModel == null )
-        //    {
-        //        throw new InvalidOperationException();
-        //    }
-
-        //    if ( recipeModel.ImageModel == null )
-        //    {
-        //        recipeModel.ImageModel = new ImageModel();
-        //    }
-        //    recipeModel.ImageModel.Image = memoryStream.ToArray();
-        //    recipeModel.ImageModel.MimeType = contentType;
-
-        //    SaveChangedRecipe(recipeModel);
-        //}
-
-        //public void RemoveImage(Guid id)
-        //{
-        //    RecipeModel recipeModel = this.recipeDb.Recipes.Find(id);
-
-        //    if ( recipeModel == null )
-        //    {
-        //        throw new InvalidOperationException();
-        //    }
-
-        //    recipeModel.ImageModel = null;
-
-        //    this.SaveChangedRecipe(recipeModel);
-        //}
 
         public void Create(RecipeModel recipemodel)
         {
@@ -129,7 +96,7 @@ namespace Mvc4WebRole
 
         public void SetTags(Guid recipeId, IEnumerable<Guid> tagGuids)
         {
-            RecipeModel recipeModel = this.GetRecipe(recipeId);
+            var recipeModel = this.GetRecipe(recipeId);
             
             recipeModel.Tags.RemoveAll(t => ! tagGuids.Contains(t.ID) );
 
@@ -155,7 +122,7 @@ namespace Mvc4WebRole
 
         public void DeleteTag(Guid id)
         {
-            TagModel tagmodel = this.recipeDb.Tags.Find(id);
+            var tagmodel = this.recipeDb.Tags.Find(id);
             this.recipeDb.Tags.Remove(tagmodel);
             this.recipeDb.SaveChanges();
         }

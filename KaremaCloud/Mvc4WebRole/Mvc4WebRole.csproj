@@ -244,10 +244,6 @@
     <Compile Include="Migrations\201411131035235_RemoveImages.Designer.cs">
       <DependentUpon>201411131035235_RemoveImages.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201411131052536_ForeignKey.cs" />
-    <Compile Include="Migrations\201411131052536_ForeignKey.Designer.cs">
-      <DependentUpon>201411131052536_ForeignKey.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\IngredientModel.cs" />
@@ -596,9 +592,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411131035235_RemoveImages.resx">
       <DependentUpon>201411131035235_RemoveImages.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201411131052536_ForeignKey.resx">
-      <DependentUpon>201411131052536_ForeignKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
