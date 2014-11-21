@@ -15,8 +15,5 @@
       <Import moduleName="Diagnostics" />
       <Import moduleName="RemoteForwarder" />
     </Imports>
-    <ConfigurationSettings>
-      <Setting name="RecipeDataBase" />
-    </ConfigurationSettings>
   </WebRole>
 </ServiceDefinition>
