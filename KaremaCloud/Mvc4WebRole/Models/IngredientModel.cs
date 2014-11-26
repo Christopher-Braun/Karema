@@ -21,13 +21,6 @@ namespace Mvc4WebRole.Models
             ID = Guid.NewGuid();
         }
 
-        public IngredientModel(Guid id, Single amount, String amountType, String name)
-        {
-            this.ID = id;
-            this.AmountType = amountType;
-            this.Amount = amount;
-            this.Name = name;
-        }
 
         [Required(ErrorMessage = "Menge muss angegeben werden")]
         [Display(Name = "Menge")]

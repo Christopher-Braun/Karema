@@ -11,14 +11,7 @@
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
 
-    if (Model == null)
-    {
-        @Html.Action("_EditNew")
-    }
-    else
-    {
-        @Html.Action("_Edit", Model)
-    }
+    @(Model == null ? Html.Action("_EditNew") : Html.Action("_Edit", Model))
 
     <button type="submit">Erstellen</button>
 

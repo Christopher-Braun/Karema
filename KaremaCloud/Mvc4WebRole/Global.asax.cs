@@ -6,10 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using System.Web.Security;
 using Mvc4WebRole.Filters;
 using Mvc4WebRole.Migrations;
-using WebMatrix.WebData;
 
 
 namespace Mvc4WebRole
@@ -42,7 +40,7 @@ namespace Mvc4WebRole
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            BundleMobileConfig.RegisterBundles(BundleTable.Bundles);
+         //   BundleMobileConfig.RegisterBundles(BundleTable.Bundles);
 
             SercurityInit.Init();
 
