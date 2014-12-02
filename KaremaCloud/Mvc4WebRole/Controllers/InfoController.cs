@@ -34,14 +34,14 @@ namespace Mvc4WebRole.Controllers
         // GET: /Recipe/
         public ActionResult ByAuthor()
         {
-            IEnumerable<IGrouping<String, RecipeModel>> recipes = repository.Recipes.ToList().GroupBy(r => r.Author);
+            IEnumerable<IGrouping<String, RecipeModel>> recipes = repository.Recipes.ToList().GroupBy(r => r.Author, StringComparer.InvariantCultureIgnoreCase);
             return View(recipes);
         }
 
-         [AllowAnonymous]
+        [AllowAnonymous]
         public ActionResult Impressum()
         {
-            return View( );
+            return View();
         }
 
         public ActionResult LastChanged()
