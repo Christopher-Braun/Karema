@@ -53,7 +53,7 @@ namespace Mvc4WebRole.Models
             set;
         }
 
-        [Display(Name = "Personenzahl")]
+        [Display(Name = "Anzahl / Personenzahl")]
         [Required]
         public Int32 DefaultPersonCount
         {

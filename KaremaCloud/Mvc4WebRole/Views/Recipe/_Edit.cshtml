@@ -101,7 +101,7 @@
     </div>
 
     <div>
-        @Html.TextBoxFor(model => model.DefaultPersonCount, new { @type = "range", min = 1, max = 12 })
+        @Html.TextBoxFor(model => model.DefaultPersonCount, new { @type = "range", min = 1, max = @Defines.MaxPersonCount })
         @Html.ValidationMessageFor(model => model.DefaultPersonCount)
     </div>
 

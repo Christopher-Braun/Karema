@@ -244,6 +244,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Defines.cs" />
     <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Persistance\RecipeDomain.cs" />
     <Compile Include="Persistance\SecurityInit.cs" />

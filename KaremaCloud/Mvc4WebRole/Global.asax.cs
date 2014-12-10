@@ -31,7 +31,7 @@ namespace Mvc4WebRole
 
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<RecipeDbContext, Configuration>());
 
-            AreaRegistration.RegisterAllAreas();
+         // Hab nur eine   AreaRegistration.RegisterAllAreas();
 
             ModelBinders.Binders.Add(typeof(Single), new SingleMultiCultureModelBinder());
 
