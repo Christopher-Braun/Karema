@@ -1,7 +1,7 @@
 ﻿@model Mvc4WebRole.ViewModels.RecipeTagMapModel
 
 @{
-    ViewBag.Title = "Tags zuweisen";
+    ViewBag.Title = "Tags für '" + Model.RecipeName + "' zuweisen";
 }
 
 @Html.Partial("_Title")
@@ -14,11 +14,8 @@
 
     @Html.HiddenFor(model => model.RecipeID)
 
-    <h3>
-        @Html.DisplayNameFor(model => model.RecipeName) : @Html.DisplayFor(model => model.RecipeName)
-    </h3>
 
-    for ( int i = 0; i < Model.TagInfos.Count(); i++ )
+    for ( var i = 0; i < Model.TagInfos.Count(); i++ )
     {
         @Html.HiddenFor(model => model.TagInfos[i].ID)
         <p>
