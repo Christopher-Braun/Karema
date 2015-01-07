@@ -31,7 +31,7 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Details(Guid id)
         {
-            RecipeModel recipemodel = repository.GetRecipe(id);
+            var recipemodel = repository.GetRecipe(id);
             if ( recipemodel == null )
             {
                 return HttpNotFound();
@@ -56,7 +56,7 @@ namespace Mvc4WebRole.Controllers
 
                 SessionLogger.AddLog("Recipe " + recipemodel.Name + " with ID" + recipemodel.ID + " created");
 
-                return RedirectToAction("Details", new { id = recipemodel.ID });
+                return RedirectToAction("AssignTags","Tags", new { id = recipemodel.ID });
             }
 
             return View(recipemodel);
