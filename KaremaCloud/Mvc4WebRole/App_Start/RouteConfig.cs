@@ -18,29 +18,29 @@ namespace Mvc4WebRole
                     action = "Index",
                     id = UrlParameter.Optional
                 }
-            );
+                );
 
             routes.MapRoute(
-name: "Logs",
-url: "{controller}/{action}/{id}",
-defaults: new
-{
-    controller = "Info",
-    action = "Logs",
-    id = UrlParameter.Optional
-}
-);
+                name: "Logs",
+                url: "{controller}/{action}/{id}",
+                defaults: new
+                {
+                    controller = "Info",
+                    action = "Logs",
+                    id = UrlParameter.Optional
+                }
+                );
 
             routes.MapRoute(
-     name: "Info",
-     url: "{controller}/{action}/{id}",
-     defaults: new
-     {
-         controller = "Info",
-         action = "Index",
-         id = UrlParameter.Optional
-     }
- );
+                name: "Info",
+                url: "{controller}/{action}/{id}",
+                defaults: new
+                {
+                    controller = "Info",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
+                );
         }
     }
 }

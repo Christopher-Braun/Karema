@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Globalization;
 using System.Web.Mvc;
+using Mvc4WebRole.Models;
 
 namespace Mvc4WebRole.Filters
 {
@@ -8,16 +8,16 @@ namespace Mvc4WebRole.Filters
     {
         public object BindModel(ControllerContext controllerContext, ModelBindingContext bindingContext)
         {
-            ValueProviderResult valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
-            ModelState modelState = new ModelState {Value = valueResult};
+            var valueResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+            ModelState modelState = new ModelState { Value = valueResult };
             object actualValue = null;
             try
             {
-                actualValue = Convert.ToSingle(valueResult.AttemptedValue.Replace('.',','), new CultureInfo("de-DE"));
+                actualValue = Convert.ToSingle(valueResult.AttemptedValue.Replace('.', ','), Defines.Culture);
             }
             catch (FormatException e)
             {
-                    modelState.Errors.Add(e);
+                modelState.Errors.Add(e);
             }
 
             var key = bindingContext.ModelName;

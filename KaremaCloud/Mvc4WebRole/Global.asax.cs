@@ -8,6 +8,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Mvc4WebRole.Filters;
 using Mvc4WebRole.Migrations;
+using Mvc4WebRole.Models;
 
 
 namespace Mvc4WebRole
@@ -21,9 +22,9 @@ namespace Mvc4WebRole
         {
             SessionLogger.AddLogInit("Application_Start");
 
-            var germanCulture = new CultureInfo("de-DE");
-            Thread.CurrentThread.CurrentCulture = germanCulture;
-            Thread.CurrentThread.CurrentUICulture = germanCulture;
+         
+            Thread.CurrentThread.CurrentCulture = Defines.Culture;
+            Thread.CurrentThread.CurrentUICulture = Defines.Culture;
 
 
             ViewEngines.Engines.Clear();
