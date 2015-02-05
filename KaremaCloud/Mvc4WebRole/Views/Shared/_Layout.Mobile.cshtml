@@ -7,51 +7,51 @@
 
     @Styles.Render("~/Content/jquerymobile/css")
     @Scripts.Render("~/bundles/jquery")
-    
+
     <script type="text/javascript">
         $(document).bind("mobileinit", function () { $.mobile.ajaxEnabled = true; });
     </script>
-    
+
     @Scripts.Render("~/bundles/jquerymobile")
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jqueryval")
-    
-    </head>
 
-    <body>
-        <header>
-            <nav>
-              
-                <ul id="menu2">
-                    <li class="site-title">@Html.ActionLink("Karema", "Index", "Recipe")</li>
-                    <li>@Html.ActionLink("Rezepte", "Index", "Recipe")</li>
-                    <li>@Html.ActionLink("Tags", "Overview", "Tags")</li>
-                    <li>@Html.ActionLink("Info", "Index", "Info")</li>
-                </ul>
-            </nav>
-        </header>
-        <div id="body">
-            @RenderSection("featured", required: false)
-            <section class="content-wrapper main-content clear-fix">
-                @RenderBody()
-            </section>
-        </div>
+</head>
 
-        <footer data-role="footer">
-            <div class="content-wrapper">
-                <div class="float-left">
-                    <p>&copy; @DateTime.Now.Year - Karema mobile | @Html.ActionLink("Impressum", "Impressum", "Info") </p>
-                </div>
-            </div>
-        </footer>
-        
+<body>
+    <header>
+        <nav>
 
+            <ul id="menu2">
+                <p class="site-title">@Html.ActionLink("Karema", "Index", "Recipe")</p>
+                <li>@Html.ActionLink("Rezepte", "Index", "Recipe")</li>
+                <li>@Html.ActionLink("Tags", "Overview", "Tags")</li>
+                <li>@Html.ActionLink("Info", "Index", "Info")</li>
+            </ul>
+        </nav>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+
+    <footer data-role="footer">
         <div class="content-wrapper">
-            <p />
-            @Html.Partial("_ViewSwitcher")
-            <p />
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - Karema mobile | @Html.ActionLink("Impressum", "Impressum", "Info") </p>
+            </div>
         </div>
+    </footer>
 
-        @RenderSection("scripts", required: false)
-    </body>
-    </html>
+
+    <div class="content-wrapper">
+        <p />
+        @Html.Partial("_ViewSwitcher")
+        <p />
+    </div>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
