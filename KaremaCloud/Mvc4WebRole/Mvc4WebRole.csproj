@@ -245,15 +245,12 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Defines.cs" />
-    <Compile Include="Models\IngredientModel.cs" />
     <Compile Include="Persistance\RecipeDomain.cs" />
     <Compile Include="Persistance\SecurityInit.cs" />
     <Compile Include="Persistance\SessionLogger.cs" />
     <Compile Include="ViewModels\RecipeInfo.cs" />
-    <Compile Include="Models\RecipeModel.cs" />
     <Compile Include="ViewModels\UserWithRoles.cs" />
     <Compile Include="ViewModels\RecipeTagMapModel.cs" />
-    <Compile Include="Models\TagModel.cs" />
     <Compile Include="Persistance\RecipeDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\RoleInfo.cs" />
@@ -588,6 +585,12 @@
     <EmbeddedResource Include="Migrations\201411131035235_RemoveImages.resx">
       <DependentUpon>201411131035235_RemoveImages.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{792fdcc3-11df-4ac4-af7e-4d9109f160c9}</Project>
+      <Name>Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
