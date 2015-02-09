@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using Mvc4WebRole.Models;
 
 namespace Mvc4WebRole
@@ -12,6 +13,7 @@ namespace Mvc4WebRole
         public RecipeDbContext()
             : base("DefaultConnection")
         {
+           
             //   this.Database.Log = SessionLogger.AddLog;
         }
 

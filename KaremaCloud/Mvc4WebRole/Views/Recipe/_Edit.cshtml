@@ -133,7 +133,6 @@
                     <td>@Html.EditorFor(model => model.Ingredients[i].Amount) </td>
                     <td>@Html.EditorFor(model => model.Ingredients[i].AmountType) </td>
                     <td>@Html.EditorFor(model => model.Ingredients[i].Name) </td>
-                    @*  <td>@Html.HiddenFor(model => model.Ingredients[i].ID) </td>*@
 
                     <td>
                         <button id='Ingredients_@(i)__Remove' data-icon="delete" type='button'>Entfernen</button>
@@ -142,6 +141,11 @@
                     @Html.ValidationMessageFor(model => model.Ingredients[i].Amount)
                     @Html.ValidationMessageFor(model => model.Ingredients[i].AmountType)
                     @Html.ValidationMessageFor(model => model.Ingredients[i].Name)
+                    
+                    
+                    
+                    @Html.HiddenFor(model => model.Ingredients[i].ID)
+                    @Html.HiddenFor(model => model.Ingredients[i].RecipeModelID)
                 </tr>
 
             }

@@ -23,7 +23,7 @@ namespace Mvc4WebRole.Controllers
                 var recipes = repository.RecipeInfos.OrderBy(t => t.Name);
                 return View(recipes);
             }
-            catch ( Exception ex )
+            catch (Exception ex)
             {
                 return View("Error", ex);
             }
@@ -31,8 +31,8 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Details(Guid id)
         {
-            var recipemodel = repository.GetRecipe(id);
-            if ( recipemodel == null )
+            var recipemodel = repository.GetCompleteRecipe(id);
+            if (recipemodel == null)
             {
                 return HttpNotFound();
             }
@@ -50,13 +50,13 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(RecipeModel recipemodel)
         {
-            if ( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
                 repository.Create(recipemodel);
 
                 SessionLogger.AddLog("Recipe " + recipemodel.Name + " with ID" + recipemodel.ID + " created");
 
-                return RedirectToAction("AssignTags","Tags", new { id = recipemodel.ID });
+                return RedirectToAction("AssignTags", "Tags", new { id = recipemodel.ID });
             }
 
             return View(recipemodel);
@@ -64,14 +64,14 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Edit(Guid id)
         {
-            if ( !repository.CanChange(id) )
+            if (!repository.CanChange(id))
             {
                 return RedirectToAction("AccessDenied", "Account");
             }
 
-            RecipeModel recipemodel = repository.GetRecipe(id);
+            RecipeModel recipemodel = repository.GetCompleteRecipe(id);
 
-            if ( recipemodel == null )
+            if (recipemodel == null)
             {
                 return HttpNotFound();
             }
@@ -82,12 +82,12 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(RecipeModel recipemodel)
         {
-            if ( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
-                var recipeToUpdate = repository.GetRecipe(recipemodel.ID);
-                TryUpdateModel(recipeToUpdate, new[] { "Name", "Hint", "Ingredients", "DefaultPersonCount", "Author", "Description" });
+                // var recipeToUpdate = repository.GetCompleteRecipe(recipemodel.ID);
+                // TryUpdateModel(recipeToUpdate, new[] { "Name", "Hint", "Ingredients", "DefaultPersonCount", "Author", "Description" });
 
-                repository.EditRecipe(recipeToUpdate);
+                repository.EditRecipe(recipemodel);
 
                 SessionLogger.AddLog("Recipe " + recipemodel.Name + " with ID" + recipemodel.ID + " modified");
 
@@ -98,13 +98,13 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Delete(Guid id)
         {
-            if ( !repository.CanChange(id) )
+            if (!repository.CanChange(id))
             {
                 return RedirectToAction("AccessDenied", "Account");
             }
 
             RecipeModel recipemodel = repository.GetRecipe(id);
-            if ( recipemodel == null )
+            if (recipemodel == null)
             {
                 return HttpNotFound();
             }

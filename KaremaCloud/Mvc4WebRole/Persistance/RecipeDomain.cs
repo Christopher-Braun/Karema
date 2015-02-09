@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web.Security;
+using Microsoft.Ajax.Utilities;
 using Mvc4WebRole.Models;
 using Mvc4WebRole.ViewModels;
 using WebMatrix.WebData;
@@ -11,35 +12,30 @@ namespace Mvc4WebRole
 {
     public class RecipeDomain
     {
-        private readonly RecipeDbContext recipeDb;
+        private readonly RecipeDbContext recipeContext;
 
         public RecipeDomain()
         {
-            this.recipeDb = new RecipeDbContext();
+            this.recipeContext = new RecipeDbContext();
         }
 
-        public IQueryable<RecipeInfo> RecipeInfos
+        public IEnumerable<RecipeInfo> RecipeInfos
         {
             get
             {
-                return this.recipeDb.Recipes.Select(t => new RecipeInfo { Id = t.ID, Name = t.Name });
+                return this.recipeContext.Recipes.Select(t => new RecipeInfo { Id = t.ID, Name = t.Name });
             }
-        }
-
-        public DbSet<TagModel> Tags
-        {
-            get { return this.recipeDb.Tags; }
         }
 
         public Boolean CanChange(Guid recipeId)
         {
-            if ( Roles.IsUserInRole("Editor") )
+            if (Roles.IsUserInRole("Editor"))
             {
                 return true;
             }
 
             var recipemodel = this.GetRecipe(recipeId);
-            return String.Compare(recipemodel.Author, WebSecurity.CurrentUserName,StringComparison.InvariantCultureIgnoreCase) ==0;
+            return String.Compare(recipemodel.Author, WebSecurity.CurrentUserName, StringComparison.InvariantCultureIgnoreCase) == 0;
         }
 
         public void Create(RecipeModel recipemodel)
@@ -49,82 +45,85 @@ namespace Mvc4WebRole
             recipemodel.TimeCreated = DateTime.UtcNow;
             recipemodel.LastTimeChanged = DateTime.UtcNow;
 
-            OrderIngredients(recipemodel);
-            this.recipeDb.Recipes.Add(recipemodel);
-            this.recipeDb.SaveChanges();
+            OrderIngredients(recipemodel.Ingredients);
+            this.recipeContext.Recipes.Add(recipemodel);
+            this.recipeContext.SaveChanges();
         }
 
-        public void EditRecipe(RecipeModel recipemodel)
+        public void EditRecipe(RecipeModel modifiedRecipe)
         {
-            recipemodel.LastTimeChanged  = DateTime.UtcNow;
-            
-            var ingeredientsForRecipe = this.recipeDb.Ingredients.Where(t => t.RecipeModelID == recipemodel.ID).ToList();
-            ingeredientsForRecipe.ForEach(t => this.recipeDb.Ingredients.Remove(t));
-            
-            recipemodel.Ingredients.ForEach(t => this.recipeDb.Ingredients.Add(t));
-            SaveChangedRecipe(recipemodel);
+            modifiedRecipe.LastTimeChanged = DateTime.UtcNow;
+
+            var originalRecipe = recipeContext.Recipes
+                .Where(p => p.ID == modifiedRecipe.ID)
+                .Include(p => p.Ingredients)
+                .SingleOrDefault();
+
+            var originalEntry = recipeContext.Entry(originalRecipe);
+            originalEntry.CurrentValues.SetValues(modifiedRecipe);
+
+            if (originalRecipe == null)
+            {
+                throw new InvalidOperationException("No recipe found for id " + modifiedRecipe.ID);
+            }
+
+            foreach (var ingredient in modifiedRecipe.Ingredients)
+            {
+                var originalChildItem = originalRecipe.Ingredients.SingleOrDefault(i => i.ID == ingredient.ID && i.ID != Guid.Empty);
+                // Is original child item with same ID in DB?
+                if (originalChildItem != null)
+                {
+                    // Yes -> Update scalar properties of child item
+                    var childEntry = recipeContext.Entry(originalChildItem);
+                    childEntry.CurrentValues.SetValues(ingredient);
+                }
+                else
+                {
+                    // No -> It's a new child item -> Insert
+                    originalRecipe.Ingredients.Add(ingredient);
+                }
+            }
+
+            foreach (var originalChildItem in
+                originalRecipe.Ingredients.Where(c => c.ID != Guid.Empty).
+                    ToList())
+            {
+                // Are there child items in the DB which are NOT in the
+                // new child item collection anymore?
+                if (modifiedRecipe.Ingredients.All(c => c.ID != originalChildItem.ID))
+                    // Yes -> It's a deleted child item -> Delete
+                    recipeContext.Ingredients.Remove(originalChildItem);
+            }
+
+            OrderIngredients(originalRecipe.Ingredients);
+            this.recipeContext.SaveChanges();
         }
 
-        public RecipeModel GetRecipe(Guid id)
+        private void OrderIngredients(IEnumerable<IngredientModel> ingredients)
+        {
+            int i = 0;
+            ingredients.ForEach(x => x.Order = i++);
+        }
+
+        public RecipeModel GetCompleteRecipe(Guid id)
         {
             //Eager loading instead of lazy            
             //  return Recipes.Find(id); 
-            var recipe = this.recipeDb.Recipes.Include(x => x.Ingredients).Include(x => x.Tags).First(x => x.ID == id);
+            var recipe = this.recipeContext.Recipes.Include(x => x.Ingredients).Include(x => x.Tags).First(x => x.ID == id);
             recipe.Ingredients = recipe.Ingredients.OrderBy(i => i.Order).ToList();
             return recipe;
         }
 
-        public void SaveChangedRecipe(RecipeModel recipemodel)
+        public RecipeModel GetRecipe(Guid id)
         {
-            OrderIngredients(recipemodel);
-            this.recipeDb.Entry(recipemodel).State = EntityState.Modified;
-            this.recipeDb.SaveChanges();
-        }
-
-        private void OrderIngredients(RecipeModel model)
-        {
-            int i = 0;
-            model.Ingredients.ForEach(x => x.Order = i++);
+            return this.recipeContext.Recipes.Find(id);
         }
 
         public void DeleteRecipe(Guid id)
         {
-            var recipe = this.recipeDb.Recipes.Find(id);
-            this.recipeDb.Entry(recipe).State = EntityState.Deleted;
-            this.recipeDb.SaveChanges();
-        }
-
-        public void SetTags(Guid recipeId, IEnumerable<Guid> tagGuids)
-        {
-            var recipeModel = this.GetRecipe(recipeId);
-            
-            recipeModel.Tags.RemoveAll(t => ! tagGuids.Contains(t.ID) );
-
-            var assignedTagIds = recipeModel.Tags.Select(y => y.ID).ToList();
-            var tagsToAdd = tagGuids.Where(t => !assignedTagIds.Contains(t)).Select(i => this.Tags.Find(i));
-            recipeModel.Tags.AddRange(tagsToAdd);
-
-            this.recipeDb.SaveChanges();
-        }
-
-        public void CreateTag(TagModel tagmodel)
-        {
-            tagmodel.ID = Guid.NewGuid();
-            this.recipeDb.Tags.Add(tagmodel);
-            this.recipeDb.SaveChanges();
-        }
-
-        public void EditTag(TagModel tagmodel)
-        {
-            this.recipeDb.Entry(tagmodel).State = EntityState.Modified;
-            this.recipeDb.SaveChanges();
-        }
-
-        public void DeleteTag(Guid id)
-        {
-            var tagmodel = this.recipeDb.Tags.Find(id);
-            this.recipeDb.Tags.Remove(tagmodel);
-            this.recipeDb.SaveChanges();
+            var recipe = this.recipeContext.Recipes.Find(id);
+            this.recipeContext.Entry(recipe).State = EntityState.Deleted;
+            this.recipeContext.SaveChanges();
         }
     }
 }

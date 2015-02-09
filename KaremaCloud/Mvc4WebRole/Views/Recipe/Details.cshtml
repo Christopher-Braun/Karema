@@ -84,6 +84,7 @@
     {
         var ingredient = Model.Ingredients.ElementAt(i);
 
+
         @Html.HiddenFor(model => ingredient.Amount, new { id = @i + "origAmount" })
         @Html.HiddenFor(model => ingredient.AmountType, new { id = @i + "origAmountType" })
         @Html.HiddenFor(model => ingredient.Name, new { id = @i + "origName" })
@@ -136,15 +137,15 @@
 </p>
 
 @*@{
-    String imageLinkTitle = Model.HasImage ? "Bild" : "Bild hinzufügen";
-}
+        String imageLinkTitle = Model.HasImage ? "Bild" : "Bild hinzufügen";
+    }
+
+    <p>
+        @Html.ActionLink(imageLinkTitle, "Details", "RecipeImage", new { id = Model.ID }, null)
+    </p>*@
 
 <p>
-    @Html.ActionLink(imageLinkTitle, "Details", "RecipeImage", new { id = Model.ID }, null)
-</p>*@
-
-<p>
-    @Html.ActionLink("Tags zuweisen", "AssignTags", "Tags", new { id = Model.ID }, new object()) |
+    @Html.ActionLink("Tags zuweisen", "AssignTags", "Tags", new { recipeId = Model.ID }, new object()) |
     @Html.ActionLink("Bearbeiten", "Edit", new { id = Model.ID }) |
     @Html.ActionLink("Löschen", "Delete", new { id = Model.ID })
 </p>

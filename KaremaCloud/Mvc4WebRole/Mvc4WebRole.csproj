@@ -248,6 +248,7 @@
     <Compile Include="Persistance\RecipeDomain.cs" />
     <Compile Include="Persistance\SecurityInit.cs" />
     <Compile Include="Persistance\SessionLogger.cs" />
+    <Compile Include="Persistance\TagDomain.cs" />
     <Compile Include="ViewModels\RecipeInfo.cs" />
     <Compile Include="ViewModels\UserWithRoles.cs" />
     <Compile Include="ViewModels\RecipeTagMapModel.cs" />

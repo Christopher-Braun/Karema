@@ -10,31 +10,34 @@ namespace Mvc4WebRole.Controllers
     [EnhancedAuthorize(Roles = "Reader")]
     public class TagsController : Controller
     {
-        private readonly RecipeDomain repository = new RecipeDomain();
+        private readonly TagDomain tagDomain = new TagDomain();
+        private readonly RecipeDomain recipeDomain = new RecipeDomain();
 
-        public ActionResult AssignTags(Guid id)
+        public ActionResult AssignTags(Guid recipeId)
         {
-            if ( !repository.CanChange(id) )
+            if (!recipeDomain.CanChange(recipeId))
             {
                 return RedirectToAction("AccessDenied", "Account");
             }
 
-            RecipeModel recipemodel = repository.GetRecipe(id);
+            var recipemodel = recipeDomain.GetRecipe(recipeId);
 
-            if ( recipemodel == null )
+            if (recipemodel == null)
             {
                 return HttpNotFound();
             }
 
-            var tags = repository.Tags.ToList().Select(t =>
+            var rmTags = recipemodel.Tags.Select(t => t.ID);
+
+            var tags = tagDomain.Tags.ToList().Select(t =>
             new TagInfo
             {
                 Caption = t.Caption,
                 ID = t.ID,
-                IsChecked = t.Recipes.Contains(recipemodel),
+                IsChecked = rmTags.Contains(t.ID)
             }).ToList();
 
-            var model = new RecipeTagMapModel { RecipeID = id, TagInfos = tags, RecipeName = recipemodel.Name };
+            var model = new RecipeTagMapModel { RecipeID = recipeId, TagInfos = tags, RecipeName = recipemodel.Name };
 
             return View(model);
         }
@@ -44,9 +47,9 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AssignTags(RecipeTagMapModel model)
         {
-            if ( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
-                repository.SetTags(model.RecipeID, model.TagInfos.Where(t=> t.IsChecked).Select(t=>t.ID));
+                tagDomain.SetTags(model.RecipeID, model.TagInfos.Where(t => t.IsChecked).Select(t => t.ID));
                 return RedirectToAction("Details", "Recipe", new { ID = model.RecipeID });
             }
             return View(model);
@@ -54,18 +57,18 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Index()
         {
-            return View(repository.Tags.ToList());
+            return View(tagDomain.Tags.ToList());
         }
 
         public ActionResult Overview()
         {
-            return View(repository.Tags.ToList());
+            return View(tagDomain.Tags.ToList());
         }
 
         public ActionResult Details(Guid id)
         {
-            TagModel tagmodel = repository.Tags.Find(id);
-            if ( tagmodel == null )
+            TagModel tagmodel = tagDomain.GetTag(id);
+            if (tagmodel == null)
             {
                 return HttpNotFound();
             }
@@ -82,9 +85,9 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(TagModel tagmodel)
         {
-            if ( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
-                repository.CreateTag(tagmodel);
+                tagDomain.CreateTag(tagmodel);
                 return RedirectToAction("Index");
             }
 
@@ -94,8 +97,8 @@ namespace Mvc4WebRole.Controllers
         [EnhancedAuthorize(Roles = "Editor")]
         public ActionResult Edit(Guid id)
         {
-            TagModel tagmodel = repository.Tags.Find(id);
-            if ( tagmodel == null )
+            TagModel tagmodel = tagDomain.GetTag(id);
+            if (tagmodel == null)
             {
                 return HttpNotFound();
             }
@@ -106,9 +109,9 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(TagModel tagmodel)
         {
-            if ( ModelState.IsValid )
+            if (ModelState.IsValid)
             {
-                this.repository.EditTag(tagmodel);
+                this.tagDomain.EditTag(tagmodel);
                 return RedirectToAction("Index");
             }
             return View(tagmodel);
@@ -117,8 +120,8 @@ namespace Mvc4WebRole.Controllers
         [EnhancedAuthorize(Roles = "Editor")]
         public ActionResult Delete(Guid id)
         {
-            TagModel tagmodel = repository.Tags.Find(id);
-            if ( tagmodel == null )
+            TagModel tagmodel = tagDomain.GetTag(id);
+            if (tagmodel == null)
             {
                 return HttpNotFound();
             }
@@ -129,7 +132,7 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            this.repository.DeleteTag(id);
+            this.tagDomain.DeleteTag(id);
             return RedirectToAction("Index");
         }
 
