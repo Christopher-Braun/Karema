@@ -57,7 +57,7 @@ namespace Mvc4WebRole.Controllers
 
                 SessionLogger.AddLog("Recipe " + recipemodel.Name + " with ID" + recipemodel.ID + " created");
 
-                return RedirectToAction("AssignTags", "Tags", new { id = recipemodel.ID });
+                return RedirectToAction("AssignTags", "Tags", new { recipeId = recipemodel.ID });
             }
 
             return View(recipemodel);
