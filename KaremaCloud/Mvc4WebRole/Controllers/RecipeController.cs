@@ -110,7 +110,7 @@ namespace Mvc4WebRole.Controllers
 
 
 
-                var dataUrl = "data-url=http:/karema.apphb.com/Recipe/Details/" + recipemodel.ID + "";
+                var dataUrl = "data-url=Recipe/Details/" + recipemodel.ID + "";
                 TempData["DataUrl"] = dataUrl;
 
 
