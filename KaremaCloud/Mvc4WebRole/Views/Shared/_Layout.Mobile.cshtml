@@ -9,7 +9,7 @@
     @Scripts.Render("~/bundles/jquery")
 
     <script type="text/javascript">
-        $(document).bind("mobileinit", function () { $.mobile.ajaxEnabled = true; });
+    $(document).bind("mobileinit", function () { $.mobile.ajaxEnabled = true; });
     </script>
 
     @Scripts.Render("~/bundles/jquerymobile")
@@ -18,7 +18,7 @@
 
 </head>
 
-<body>
+<body data-role="page" data-theme="a" @Html.GetPageUrl(ViewContext)>
     <header>
         <nav>
 

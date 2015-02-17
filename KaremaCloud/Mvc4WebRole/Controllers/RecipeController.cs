@@ -79,20 +79,6 @@ namespace Mvc4WebRole.Controllers
             return View(recipemodel);
         }
 
-
-        private string hostname = "";
-
-        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
-        {
-            if (requestContext.HttpContext.Request.Url != null)
-            {
-                hostname = requestContext.HttpContext.Request.Url.Host;
-            }
-
-
-            base.Initialize(requestContext);
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(RecipeModel recipemodel)
@@ -105,15 +91,6 @@ namespace Mvc4WebRole.Controllers
                 repository.EditRecipe(recipemodel);
 
                 SessionLogger.AddLog("Recipe " + recipemodel.Name + " with ID" + recipemodel.ID + " modified");
-
-              
-
-
-
-                var dataUrl = "data-url=Recipe/Details/" + recipemodel.ID + "";
-                TempData["DataUrl"] = dataUrl;
-
-
 
                 var redirectToRouteResult = RedirectToAction("Details", new { id = recipemodel.ID });
                 return redirectToRouteResult;

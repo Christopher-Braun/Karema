@@ -250,6 +250,7 @@
     <Compile Include="Persistance\SessionLogger.cs" />
     <Compile Include="Persistance\TagDomain.cs" />
     <Compile Include="ViewModels\RecipeInfo.cs" />
+    <Compile Include="CustomHelpers\CustomHtmlHelper.cs" />
     <Compile Include="ViewModels\UserWithRoles.cs" />
     <Compile Include="ViewModels\RecipeTagMapModel.cs" />
     <Compile Include="Persistance\RecipeDbContext.cs" />

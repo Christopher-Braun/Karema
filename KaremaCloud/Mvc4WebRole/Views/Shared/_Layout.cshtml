@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using Mvc4WebRole.CustomHelpers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -19,7 +20,7 @@
 
 
 </head>
-<body data-role="page" @TempData["DataUrl"]>
+<body data-role="page" data-theme="a" @Html.GetPageUrl(ViewContext)>
     <header>
         <div class="content-wrapper">
             <div class="float-left">
