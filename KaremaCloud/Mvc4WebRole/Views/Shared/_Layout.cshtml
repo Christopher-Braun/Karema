@@ -19,7 +19,7 @@
 
 
 </head>
-<body>
+<body data-role="page" @TempData["DataUrl"]>
     <header>
         <div class="content-wrapper">
             <div class="float-left">
@@ -47,6 +47,7 @@
             @RenderBody()
         </section>
     </div>
+
 
     <footer data-role="footer">
         <div class="content-wrapper">
