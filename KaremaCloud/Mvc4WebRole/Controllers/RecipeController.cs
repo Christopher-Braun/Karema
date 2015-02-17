@@ -110,8 +110,10 @@ namespace Mvc4WebRole.Controllers
 
 
 
-                var dataUrl = "data-url=" + hostname + "/Recipe/Details/" + recipemodel.ID + "";
+                var dataUrl = "data-url=http:/karema.apphb.com/Recipe/Details/" + recipemodel.ID + "";
                 TempData["DataUrl"] = dataUrl;
+
+
 
                 var redirectToRouteResult = RedirectToAction("Details", new { id = recipemodel.ID });
                 return redirectToRouteResult;
