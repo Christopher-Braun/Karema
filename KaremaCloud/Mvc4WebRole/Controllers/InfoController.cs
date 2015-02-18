@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web.Mvc;
+using KaReMa.Interfaces;
 using Mvc4WebRole.Filters;
 using Mvc4WebRole.Models;
 
@@ -28,6 +30,20 @@ namespace Mvc4WebRole.Controllers
             ViewBag.Tags = repository.Tags.Count();
 
             return View();
+        }
+
+
+
+        [HttpGet]
+        public virtual FileResult Download()
+        {
+
+            var data = new DataCollection {Recipes = repository.Recipes.ToList()};
+
+            var ms = DataPersistance.SaveData(data);
+           
+
+            return File(ms, "application/xml", "Recipes");
         }
 
         //
