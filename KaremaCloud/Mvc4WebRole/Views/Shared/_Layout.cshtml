@@ -48,6 +48,12 @@
             @RenderBody()
         </section>
     </div>
+    
+    <div class="content-wrapper">
+        <p />
+        @Html.Partial("_ViewSwitcher")
+        <p />
+    </div>
 
 
     <footer data-role="footer">
@@ -61,11 +67,7 @@
 
     <div></div>
 
-    <div class="content-wrapper">
-        <p />
-        @Html.Partial("_ViewSwitcher")
-        <p />
-    </div>
+   
 
     @RenderSection("scripts", required: false)
 </body>

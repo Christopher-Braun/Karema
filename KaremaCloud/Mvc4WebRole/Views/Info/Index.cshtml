@@ -1,44 +1,69 @@
-﻿
-
-@{
+﻿@{
     ViewBag.Title = "Info";
 }
 
 @Html.Partial("_Title")
 
 
-<p>
-    @Html.Partial("_LoginPartial")
-</p>
+<br />
+
+<label>Account-Verwaltung</label>
 
 <p>
-    @Html.ActionLink("Übersicht", "Overview")
-</p>
+    @if (Request.IsAuthenticated)
+    {
+        <text>
+            Anwender: <b>@User.Identity.Name</b>
+        <p>
+            @Html.ActionLink("Passwort ändern", "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })
+        </p>
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+        {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Abmelden</a>
+        }
+        </text>
+    }
+    </p>
 
-<p>
-    @Html.ActionLink("Neueste Rezepte", "LastCreated")
-</p>
-<p>
-    @Html.ActionLink("Letzte Änderungen", "LastChanged")
-</p>
 
-<p>
-    @Html.ActionLink("Autoren", "ByAuthor")
-</p>
+    <br />
+    <label>Anwender-Bereich</label>
 
-<label>Admin-Bereich</label>
+    <p>
+        @Html.ActionLink("Übersicht", "Overview")
+    </p>
 
-<p>
-    @Html.ActionLink("Anwender", "UserOverview", "Account", null, null)
-</p>
+    <p>
+        @Html.ActionLink("Neueste Rezepte", "LastCreated")
+    </p>
+    <p>
+        @Html.ActionLink("Letzte Änderungen", "LastChanged")
+    </p>
 
-<p>
-    @Html.ActionLink("Logs", "Logs")
-</p>
+    <p>
+        @Html.ActionLink("Autoren", "ByAuthor")
+    </p>
 
-<p>
-    @Html.ActionLink("Download", "Download")
-</p>
+    <p>
+        @Html.ActionLink("Impressum", "Impressum", "Info")
+    </p>
 
-@Html.Partial("_Home")
+    <br />
+    <label>Admin-Bereich</label>
+
+    <p>
+        @Html.ActionLink("Anwender", "UserOverview", "Account", null, null)
+    </p>
+
+    <p>
+        @Html.ActionLink("Logs", "Logs")
+    </p>
+
+    @*<p>
+        @Html.ActionLink("Download", "Download")
+    </p>*@
+
+<br />
+    @Html.Partial("_Home")
 
