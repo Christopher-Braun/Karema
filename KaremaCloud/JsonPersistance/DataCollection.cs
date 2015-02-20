@@ -7,17 +7,17 @@ namespace KaReMa.Interfaces
     {
         public DataCollection()
         {
-            Recipes = new List<RecipeModel>();
-            Tags = new List<TagModel>();
+            Recipes = new List<RecipeData>();
+            Tags = new List<TagData>();
         }
 
-        public List<RecipeModel> Recipes
+        public List<RecipeData> Recipes
         {
             get;
             set;
         }
 
-        public List<TagModel> Tags
+        public List<TagData> Tags
         {
             get;
             set;

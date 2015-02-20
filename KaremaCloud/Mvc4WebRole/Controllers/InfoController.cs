@@ -37,13 +37,9 @@ namespace Mvc4WebRole.Controllers
         [HttpGet]
         public virtual FileResult Download()
         {
-
-            var data = new DataCollection {Recipes = repository.Recipes.ToList()};
-
-            var ms = DataPersistance.SaveData(data);
+            var ms = DataPersistance.SaveData(repository.Recipes.ToList(),repository.Tags.ToList());
            
-
-            return File(ms, "application/xml", "Recipes");
+            return File(ms, "application/txt", "Recipes");
         }
 
         //

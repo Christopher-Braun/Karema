@@ -38,6 +38,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,9 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ModelExtensions.cs" />
     <Compile Include="DataCollection.cs" />
     <Compile Include="DataPersistance.cs" />
+    <Compile Include="DTOs\ImageData.cs" />
+    <Compile Include="DTOs\IngredientDTO.cs" />
+    <Compile Include="DTOs\MetaInfoDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="DTOs\RecipeData.cs" />
+    <Compile Include="DTOs\TagData.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">
