@@ -28,7 +28,7 @@
 
 
     <br />
-    <label>Anwender-Bereich</label>
+    <label>Weitere Funktionen</label>
 
     <p>
         @Html.ActionLink("Übersicht", "Overview")
@@ -49,21 +49,25 @@
         @Html.ActionLink("Impressum", "Impressum", "Info")
     </p>
 
+    @if (WebSecurity.CurrentUserName == "Admin")
+    {
+        <br />
+        <label>Admin-Bereich</label>
+
+        <p>
+            @Html.ActionLink("Anwender", "UserOverview", "Account", null, null)
+        </p>
+
+
+        <p>
+            @Html.ActionLink("Logs", "Logs")
+        </p>
+
+        <p>
+            <a href="/Info/Download" target="_blank">Datendatei herunterladen</a>
+        </p>
+    }
+
     <br />
-    <label>Admin-Bereich</label>
-
-    <p>
-        @Html.ActionLink("Anwender", "UserOverview", "Account", null, null)
-    </p>
-
-    <p>
-        @Html.ActionLink("Logs", "Logs")
-    </p>
-
-    <p>
-        @Html.ActionLink("Download", "Download")
-    </p>
-
-<br />
     @Html.Partial("_Home")
 

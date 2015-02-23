@@ -1,9 +1,7 @@
 ﻿
 using System.Collections.Generic;
-using System.Data.Entity.Core.Objects;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using JsonPersistance;
 using KaReMa.Interfaces;
@@ -23,10 +21,7 @@ namespace Mvc4WebRole
             var recipeData = recipes.Select(t => t.ToData()).ToList();
             recipeData.ForEach(x => dataCollection.Recipes.Add(x));
 
-            var serializer = new DataContractSerializer(typeof(DataCollection), new DataContractSerializerSettings()
-            {
-                DataContractResolver = new ProxyDataContractResolver()
-            });
+            var serializer = new DataContractJsonSerializer(typeof (DataCollection));
 
             Stream stream = new MemoryStream();
 

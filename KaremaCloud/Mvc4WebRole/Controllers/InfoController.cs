@@ -35,11 +35,12 @@ namespace Mvc4WebRole.Controllers
 
 
         [HttpGet]
+        [EnhancedAuthorize(Users = "Admin")]
         public virtual FileResult Download()
         {
-            var ms = DataPersistance.SaveData(repository.Recipes.ToList(),repository.Tags.ToList());
+            var fileStream = DataPersistance.SaveData(repository.Recipes.ToList(),repository.Tags.ToList());
            
-            return File(ms, "application/txt", "Recipes");
+            return File(fileStream, "application/json", "Recipes.json");
         }
 
         //
