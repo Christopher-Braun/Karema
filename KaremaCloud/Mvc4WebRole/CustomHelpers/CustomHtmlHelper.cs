@@ -7,6 +7,12 @@ namespace Mvc4WebRole.CustomHelpers
 {
     public static class CustomHtmlHelper
     {
+        /// <summary>
+        /// Für das Ajax + Redirect Problem
+        /// </summary>
+        /// <param name="htmlHelper"></param>
+        /// <param name="viewContext"></param>
+        /// <returns></returns>
         public static IHtmlString GetPageUrl(this HtmlHelper htmlHelper, ViewContext viewContext)
         {
             StringBuilder urlBuilder = new StringBuilder();

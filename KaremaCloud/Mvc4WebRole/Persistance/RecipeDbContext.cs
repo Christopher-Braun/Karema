@@ -13,7 +13,6 @@ namespace Mvc4WebRole
         public RecipeDbContext()
             : base("DefaultConnection")
         {
-           
             //   this.Database.Log = SessionLogger.AddLog;
         }
 
