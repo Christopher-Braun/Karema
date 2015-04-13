@@ -10,10 +10,10 @@
 <div data-role="content">
     <p></p>
 
-    <ul data-role="listview">
-        @foreach ( var item in Model )
+    <ul>
+        @foreach (var userName in Model.Select(m=>m.UserName))
         {
-            <li data-icon="grid">@Html.ActionLink(item.UserName, "AssignRoles", new { userId = item.UserId }) </li>
+            <li>@userName | @Html.ActionLink("Rollen zuweisen", "AssignRoles", new { userName }) |  @Html.ActionLink("Anwender löschen", "DeleteUser", new { userName }) </li>
         }
     </ul>
 </div>

@@ -38,38 +38,28 @@ namespace Mvc4WebRole.Controllers
         }
 
         [EnhancedAuthorize(Users = "Admin")]
-        public ActionResult AssignRoles(int userId)
+        public ActionResult AssignRoles(string userName)
         {
-            using (var ctx = new UsersContext())
-            {
-                var user = ctx.UserProfiles.Find(userId);
+            SimpleRoleProvider roleProvider = new SimpleRoleProvider(Roles.Provider);
 
-                SimpleRoleProvider roleProvider = new SimpleRoleProvider(Roles.Provider);
+            var assignedRoles = roleProvider.GetRolesForUser(userName);
+            var allRoles = roleProvider.GetAllRoles();
 
-                var assignedRoles = roleProvider.GetRolesForUser(user.UserName);
-                var allRoles = roleProvider.GetAllRoles();
+            var roleInfos = allRoles.Select(t => new RoleInfo { RoleName = t, IsChecked = assignedRoles.Contains(t) });
+            var userWithRoles = new UserWithRoles { UserName = userName, RoleInfos = roleInfos.ToList() };
 
-                var roleInfos = allRoles.Select(t => new RoleInfo { RoleName = t, IsChecked = assignedRoles.Contains(t) });
-                var userWithRoles = new UserWithRoles { UserName = user.UserName, UserID = userId, RoleInfos = roleInfos.ToList() };
+            return View(userWithRoles);
 
-                return View(userWithRoles);
-            }
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult AssignRoles(UserWithRoles userWithRoles)
         {
+            var userName = userWithRoles.UserName;
+
             if (ModelState.IsValid)
             {
-                String userName;
-                using (var ctx = new UsersContext())
-                {
-                    var user = ctx.UserProfiles.Find(userWithRoles.UserID);
-                    //      ctx.UserProfiles.Remove()
-                    userName = user.UserName;
-                }
-
                 SimpleRoleProvider roleProvider = new SimpleRoleProvider(Roles.Provider);
 
                 userWithRoles.RoleInfos.ForEach(roleInfo =>
@@ -92,6 +82,26 @@ namespace Mvc4WebRole.Controllers
 
             }
             return View(userWithRoles);
+        }
+
+        [EnhancedAuthorize(Users = "Admin")]
+        public ActionResult DeleteUser(string userName)
+        {
+            return View(model: userName);
+        }
+
+        [HttpPost, ActionName("DeleteUser")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(string userName)
+        {
+            SimpleRoleProvider roleProvider = new SimpleRoleProvider(Roles.Provider);
+            var assignedRoles = roleProvider.GetRolesForUser(userName);
+            roleProvider.RemoveUsersFromRoles(new[] { userName }, assignedRoles);
+
+            ((SimpleMembershipProvider)Membership.Provider).DeleteAccount(userName);
+            Membership.Provider.DeleteUser(userName, true);
+
+            return RedirectToAction("UserOverview");
         }
 
 

@@ -563,6 +563,7 @@
     <Content Include="Views\Account\Account.cshtml" />
     <Content Include="Views\Shared\_Home.cshtml" />
     <Content Include="Views\Info\Impressum.cshtml" />
+    <Content Include="Views\Account\DeleteUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

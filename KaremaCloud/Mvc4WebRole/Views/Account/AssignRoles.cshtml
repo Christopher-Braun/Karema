@@ -12,8 +12,6 @@
 {
     @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
-    
-     @Html.HiddenFor(model => model.UserID)
 
     for ( int i = 0; i < Model.RoleInfos.Count(); i++ )
     {

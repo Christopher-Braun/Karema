@@ -1,0 +1,20 @@
+﻿@model string
+@{
+    ViewBag.Title = "Löschen";
+}
+
+@Html.Partial("_Title")
+
+<h3>Wollen Sie den Anwender "@Model" wirklich löschen?</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <p>
+        <button data-icon="delete" type="submit">Löschen</button>
+        @Html.ActionLink("Abbrechen", "UserOverview", new { Model })
+    </p>
+}
+
+@Html.Partial("_Home")
