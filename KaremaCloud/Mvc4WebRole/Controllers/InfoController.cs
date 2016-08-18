@@ -31,8 +31,7 @@ namespace Mvc4WebRole.Controllers
 
             return View();
         }
-
-
+        
 
         [HttpGet]
         [EnhancedAuthorize(Users = "Admin")]
