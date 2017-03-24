@@ -59,13 +59,15 @@ namespace Mvc4WebRole
                 .Include(p => p.Ingredients)
                 .SingleOrDefault();
 
-            var originalEntry = recipeContext.Entry(originalRecipe);
-            originalEntry.CurrentValues.SetValues(modifiedRecipe);
 
             if (originalRecipe == null)
             {
                 throw new InvalidOperationException("No recipe found for id " + modifiedRecipe.ID);
             }
+
+            var originalEntry = recipeContext.Entry(originalRecipe);
+            originalEntry.CurrentValues.SetValues(modifiedRecipe);
+
 
             foreach (var ingredient in modifiedRecipe.Ingredients)
             {
@@ -95,7 +97,8 @@ namespace Mvc4WebRole
                     recipeContext.Ingredients.Remove(originalChildItem);
             }
 
-            OrderIngredients(originalRecipe.Ingredients);
+            //Anderes Verfahren jetzt
+         //   OrderIngredients(originalRecipe.Ingredients);
             this.recipeContext.SaveChanges();
         }
 

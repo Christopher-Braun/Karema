@@ -14,8 +14,9 @@
                 "<input type='text'  data-mini='true'    value=''           id='Ingredients_" + itemIndex + "__Amount'      name='Ingredients[" + itemIndex + "].Amount' /></td><td>" +
                 "<input type='text'     value=''        id='Ingredients_" + itemIndex + "__AmountType'  name='Ingredients[" + itemIndex + "].AmountType' /></td><td>" +
                 "<input type='text'     value=''        id='Ingredients_" + itemIndex + "__Name'        name='Ingredients[" + itemIndex + "].Name'       /></td><td>" +
+                "<input type='text'     value='"+ itemIndex +"'        id='Ingredients_" + itemIndex + "__Order'        name='Ingredients[" + itemIndex + "].Order'       /></td><td>" +
 
-                "<button type='button'                  id='Ingredients_" + itemIndex + "__Remove'      name='Ingredients[" + itemIndex + "].Remove' data-icon='delete' >Entfernen</button></td>" +
+                "<button type='button'                  id='Ingredients_" + itemIndex + "__Remove'      name='Ingredients[" + itemIndex + "].Remove' data-icon='delete'>Entfernen</button></td>" +
                 "</tr>");
             $("#ingredients").append(newItem);
 
@@ -27,6 +28,7 @@
             $("#Ingredients_" + itemIndex + "__Amount").textinput();
             $("#Ingredients_" + itemIndex + "__AmountType").textinput();
             $("#Ingredients_" + itemIndex + "__Name").textinput();
+            $("#Ingredients_" + itemIndex + "__Order").textinput();
             $("#Ingredients_" + itemIndex + "__Remove").button();
 
         });
@@ -48,34 +50,34 @@
     $(function () {
         $("form").submit(function () {
             // Normalize the sequence before submitting the form
-            ensureControlGroupsInNumericalOrder();
+          //  ensureControlGroupsInNumericalOrder();
         });
     });
 
-    function ensureControlGroupsInNumericalOrder() {
+    //function ensureControlGroupsInNumericalOrder() {
 
-        var groups = $("#ingredients tr");
-        for (var seq = 1; seq < groups.length; seq++) {
-            var group = groups[seq];
-            var cells = group.cells;
-            //Button nicht
-            for (var c = 0; c < cells.length - 1; c++) {
-                var td = cells[c];
-                var div = td.childNodes[0];
-                var input = div.childNodes[0];
+    //    var groups = $("#ingredients tr");
+    //    for (var seq = 1; seq < groups.length; seq++) {
+    //        var group = groups[seq];
+    //        var cells = group.cells;
+    //        //Button nicht
+    //        for (var c = 0; c < cells.length - 1; c++) {
+    //            var td = cells[c];
+    //            var div = td.childNodes[0];
+    //            var input = div.childNodes[0];
 
-                if (c == 0) {
-                    input.name = "Ingredients[" + (seq - 1) + "].Amount";
-                }
-                if (c == 1) {
-                    input.name = "Ingredients[" + (seq - 1) + "].AmountType";
-                }
-                if (c == 2) {
-                    input.name = "Ingredients[" + (seq - 1) + "].Name";
-                }
-            }
-        }
-    }
+    //            if (c == 0) {
+    //                input.name = "Ingredients[" + (seq - 1) + "].Amount";
+    //            }
+    //            if (c == 1) {
+    //                input.name = "Ingredients[" + (seq - 1) + "].AmountType";
+    //            }
+    //            if (c == 2) {
+    //                input.name = "Ingredients[" + (seq - 1) + "].Name";
+    //            }
+    //        }
+    //    }
+    //}
 
 </script>
 
@@ -122,6 +124,7 @@
             <td>Menge</td>
             <td>Mengenart </td>
             <td>Zutat </td>
+            <td>Order </td>
         </tr>
 
         @if ( Model != null )
@@ -133,6 +136,7 @@
                     <td>@Html.EditorFor(model => model.Ingredients[i].Amount) </td>
                     <td>@Html.EditorFor(model => model.Ingredients[i].AmountType) </td>
                     <td>@Html.EditorFor(model => model.Ingredients[i].Name) </td>
+                    <td>@Html.EditorFor(model => model.Ingredients[i].Order) </td>
 
                     <td>
                         <button id='Ingredients_@(i)__Remove' data-icon="delete" type='button'>Entfernen</button>
@@ -142,10 +146,9 @@
                     @Html.ValidationMessageFor(model => model.Ingredients[i].AmountType)
                     @Html.ValidationMessageFor(model => model.Ingredients[i].Name)
                     
-                    
-                    
                     @Html.HiddenFor(model => model.Ingredients[i].ID)
                     @Html.HiddenFor(model => model.Ingredients[i].RecipeModelID)
+
                 </tr>
 
             }

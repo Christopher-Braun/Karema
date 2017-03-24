@@ -47,7 +47,7 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AssignTags(RecipeTagMapModel model)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && model.TagInfos != null)
             {
                 tagDomain.SetTags(model.RecipeID, model.TagInfos.Where(t => t.IsChecked).Select(t => t.ID));
                 return RedirectToAction("Details", "Recipe", new { ID = model.RecipeID });
