@@ -16,6 +16,7 @@ build/
 [Oo]bj/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
+packages
 !packages/*/build/
 
 # MSTest test Results
@@ -158,3 +159,4 @@ $RECYCLE.BIN/
 #DataBaseASP Debug
 *.mdf
 *.ldf
+/KaremaCloud/packages
