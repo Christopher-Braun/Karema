@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.ServiceModel.Dispatcher;
 using System.Web.Security;
 using Microsoft.Ajax.Utilities;
 using Mvc4WebRole.Models;
@@ -23,7 +24,7 @@ namespace Mvc4WebRole
         {
             get
             {
-                return this.recipeContext.Recipes.Select(t => new RecipeInfo { Id = t.ID, Name = t.Name });
+                return this.recipeContext.Recipes.Select(t => new RecipeInfo {Id = t.ID, Name = t.Name, Star = t.Star});
             }
         }
 

@@ -168,7 +168,12 @@
         @Html.ValidationMessageFor(model => model.Description)
     </div>
 
-
+    <div>
+        <h3>@Html.LabelFor(model => model.Star)</h3>
+    </div>
+    <div>
+        @Html.EditorFor(model => model.Star)
+    </div>
 
 </div>
 

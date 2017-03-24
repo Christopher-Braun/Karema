@@ -4,16 +4,16 @@ namespace Mvc4WebRole.ViewModels
 {
     public class RecipeInfo
     {
-        public Guid Id
+        public RecipeInfo()
         {
-            get;
-            set;
+            
         }
 
-        public String Name
-        {
-            get;
-            set;
-        }
+        public Guid Id { get; set; }
+     
+
+        public String Name { get; set; }
+
+        public bool Star { get; set; }
     }
 }

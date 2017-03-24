@@ -128,6 +128,7 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Spatial, Version=5.8.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Spatial.5.8.2\lib\net40\System.Spatial.dll</HintPath>
       <Private>True</Private>
@@ -244,6 +245,10 @@
     <Compile Include="Migrations\201411131035235_RemoveImages.cs" />
     <Compile Include="Migrations\201411131035235_RemoveImages.Designer.cs">
       <DependentUpon>201411131035235_RemoveImages.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703241346446_Star.cs" />
+    <Compile Include="Migrations\201703241346446_Star.Designer.cs">
+      <DependentUpon>201703241346446_Star.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountModels.cs" />
@@ -589,6 +594,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411131035235_RemoveImages.resx">
       <DependentUpon>201411131035235_RemoveImages.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703241346446_Star.resx">
+      <DependentUpon>201703241346446_Star.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

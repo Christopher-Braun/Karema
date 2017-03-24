@@ -16,9 +16,16 @@
  </form>
   <ul data-role="listview" data-filter="true" data-input="#filter-input">
      @foreach (var item in Model)
-    {
-         <li data-icon="grid">@Html.ActionLink(item.Name, "Details", new { id = item.Id }) </li>
-    }
+     {
+         if (item.Star)
+         {
+             <li data-icon="star" >@Html.ActionLink(item.Name, "Details", new {id = item.Id}) </li>
+         }
+         else
+         {
+            <li  >@Html.ActionLink(item.Name, "Details", new { id = item.Id }) </li>
+         }
+     }
    </ul>
 
 

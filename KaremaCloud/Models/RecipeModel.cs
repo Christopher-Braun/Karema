@@ -21,6 +21,12 @@ namespace Mvc4WebRole.Models
             set;
         }
 
+        [Display(Name = "Stern")]
+        public bool Star
+        {
+            get; set;
+        }
+
         [Display(Name = "Zutaten")]
         public virtual List<IngredientModel> Ingredients
         {
