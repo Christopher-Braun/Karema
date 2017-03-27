@@ -46,7 +46,7 @@ namespace Mvc4WebRole
             recipemodel.TimeCreated = DateTime.UtcNow;
             recipemodel.LastTimeChanged = DateTime.UtcNow;
 
-            OrderIngredients(recipemodel.Ingredients);
+        //    OrderIngredients(recipemodel.Ingredients);
             this.recipeContext.Recipes.Add(recipemodel);
             this.recipeContext.SaveChanges();
         }
@@ -87,9 +87,7 @@ namespace Mvc4WebRole
                 }
             }
 
-            foreach (var originalChildItem in
-                originalRecipe.Ingredients.Where(c => c.ID != Guid.Empty).
-                    ToList())
+            foreach (var originalChildItem in originalRecipe.Ingredients.Where(c => c.ID != Guid.Empty).ToList())
             {
                 // Are there child items in the DB which are NOT in the
                 // new child item collection anymore?
@@ -103,11 +101,11 @@ namespace Mvc4WebRole
             this.recipeContext.SaveChanges();
         }
 
-        private void OrderIngredients(IEnumerable<IngredientModel> ingredients)
-        {
-            int i = 0;
-            ingredients.ForEach(x => x.Order = i++);
-        }
+        //private void OrderIngredients(IEnumerable<IngredientModel> ingredients)
+        //{
+        //    int i = 0;
+        //    ingredients.ForEach(x => x.Order = i++);
+        //}
 
         public RecipeModel GetCompleteRecipe(Guid id)
         {

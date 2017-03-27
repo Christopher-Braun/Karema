@@ -10,11 +10,11 @@ namespace Mvc4WebRole.Controllers
     [EnhancedAuthorize(Roles = "Reader")]
     public class RecipeController : Controller
     {
-        private readonly RecipeDomain repository;
+        private readonly RecipeDomain recipeDomain;
 
         public RecipeController()
         {
-            repository = new RecipeDomain();
+            recipeDomain = new RecipeDomain();
             ViewBag.NoAjax = false;
         }
 
@@ -22,7 +22,7 @@ namespace Mvc4WebRole.Controllers
         {
             try
             {
-                var recipes = repository.RecipeInfos.OrderBy(t => t.Name);
+                var recipes = recipeDomain.RecipeInfos.OrderBy(t => t.Name);
                 return View(recipes);
             }
             catch (Exception ex)
@@ -33,7 +33,7 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Details(Guid id)
         {
-            var recipemodel = repository.GetCompleteRecipe(id);
+            var recipemodel = recipeDomain.GetCompleteRecipe(id);
             if (recipemodel == null)
             {
                 return HttpNotFound();
@@ -53,7 +53,7 @@ namespace Mvc4WebRole.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.Create(recipemodel);
+                recipeDomain.Create(recipemodel);
 
                 SessionLogger.AddLog("Recipe " + recipemodel.Name + " with ID" + recipemodel.ID + " created");
 
@@ -65,12 +65,12 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Edit(Guid id)
         {
-            if (!repository.CanChange(id))
+            if (!recipeDomain.CanChange(id))
             {
                 return RedirectToAction("AccessDenied", "Account");
             }
 
-            RecipeModel recipemodel = repository.GetCompleteRecipe(id);
+            RecipeModel recipemodel = recipeDomain.GetCompleteRecipe(id);
 
             if (recipemodel == null)
             {
@@ -85,10 +85,10 @@ namespace Mvc4WebRole.Controllers
         {
             if (ModelState.IsValid)
             {
-                // var recipeToUpdate = repository.GetCompleteRecipe(recipemodel.ID);
+                // var recipeToUpdate = recipeDomain.GetCompleteRecipe(recipemodel.ID);
                 // TryUpdateModel(recipeToUpdate, new[] { "Name", "Hint", "Ingredients", "DefaultPersonCount", "Author", "Description" });
 
-                repository.EditRecipe(recipemodel);
+                recipeDomain.EditRecipe(recipemodel);
 
                 SessionLogger.AddLog("Recipe " + recipemodel.Name + " with ID" + recipemodel.ID + " modified");
 
@@ -100,12 +100,12 @@ namespace Mvc4WebRole.Controllers
 
         public ActionResult Delete(Guid id)
         {
-            if (!repository.CanChange(id))
+            if (!recipeDomain.CanChange(id))
             {
                 return RedirectToAction("AccessDenied", "Account");
             }
 
-            RecipeModel recipemodel = repository.GetRecipe(id);
+            RecipeModel recipemodel = recipeDomain.GetRecipe(id);
             if (recipemodel == null)
             {
                 return HttpNotFound();
@@ -120,7 +120,7 @@ namespace Mvc4WebRole.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(Guid id)
         {
-            repository.DeleteRecipe(id);
+            recipeDomain.DeleteRecipe(id);
             SessionLogger.AddLog("Recipe with ID" + id + "has been deleted");
 
             return RedirectToAction("Index");
